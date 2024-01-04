@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>memory_admin</module>
+        <module>untitled</module>
+    </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.gnahz</groupId>
+    <artifactId>memory</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>memory</name>
+    <description>忆父Maven</description>
+    <!--版本控制-->
+    <properties>
+        <java.version>1.8</java.version>
+        <lombok.version>1.18.16</lombok.version>
+        <druid.version>1.1.10</druid.version>
+        <mysql-connector.version>8.0.16</mysql-connector.version>
+        <mybatis-plus.version>3.3.2</mybatis-plus.version>
+        <hutool.version>4.5.7</hutool.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <!--dependencyManagement
+   子maven项目不会自动依赖dependencyManagement里面所有的依赖
+   子maven项目需要用到父maven项目中dependencyManagement里面的依赖 需要显示在子maven项目声明
+   充当后端依赖的版本仲裁者
+   -->
+    <dependencyManagement>
+       <dependencies>
+           <!--lombok依赖-->
+           <dependency>
+               <groupId>org.projectlombok</groupId>
+               <artifactId>lombok</artifactId>
+               <version>${lombok.version}</version>
+               <optional>true</optional>
+           </dependency>
+           <!--集成druid连接池-->
+           <dependency>
+               <groupId>com.alibaba</groupId>
+               <artifactId>druid-spring-boot-starter</artifactId>
+               <version>${druid.version}</version>
+           </dependency>
+           <!--Mysql数据库驱动-->
+           <dependency>
+               <groupId>mysql</groupId>
+               <artifactId>mysql-connector-java</artifactId>
+               <version>${mysql-connector.version}</version>
+           </dependency>
+           <!--MyBatis Plus 依赖-->
+           <dependency>
+               <groupId>com.baomidou</groupId>
+               <artifactId>mybatis-plus-boot-starter</artifactId>
+               <version>${mybatis-plus.version}</version>
+           </dependency>
+           <!--SpringBoot配置处理-->
+           <dependency>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-configuration-processor</artifactId>
+               <version>2.3.6.RELEASE</version>
+               <optional>true</optional>
+           </dependency>
+           <!--Hutool Java工具包-->
+           <dependency>
+               <groupId>cn.hutool</groupId>
+               <artifactId>hutool-all</artifactId>
+               <version>${hutool.version}</version>
+           </dependency>
+       </dependencies>
+    </dependencyManagement>
+</project>
