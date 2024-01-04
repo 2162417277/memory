@@ -7,13 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="memory_admin" />
-        <module name="untitled" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="memory" target="1.8" />
       <module name="memory-admin" target="21" />
-      <module name="memory_admin" target="18" />
+      <module name="memory_admin" target="8" />
       <module name="untitled" target="18" />
     </bytecodeTargetLevel>
   </component>
