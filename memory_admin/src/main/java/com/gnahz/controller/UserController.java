@@ -27,6 +27,7 @@ public class UserController {
 
     @RequestMapping(value = "/userId",method = RequestMethod.GET)
     public User userId(){
+        //return CommonResult.success(JSONUtil.toJsonStr(result));hutool工具返回json对象
         return null;
     }
 

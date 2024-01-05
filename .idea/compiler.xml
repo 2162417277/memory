@@ -11,16 +11,12 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="memory" target="1.8" />
-      <module name="memory-admin" target="21" />
       <module name="memory_admin" target="8" />
-      <module name="untitled" target="18" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="memory-admin" options="-parameters" />
       <module name="memory_admin" options="-parameters" />
-      <module name="untitled" options="-parameters" />
     </option>
   </component>
 </project>
