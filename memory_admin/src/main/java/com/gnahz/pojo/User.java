@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @Author 张伟洁
@@ -31,8 +32,12 @@ public class User implements Serializable {
     @TableField(value = "password")
     private String password;
 
+    @ApiModelProperty(value = "用户创建时间")
+    @TableField(value = "user_date")
+    private Date userDate;
+
     @ApiModelProperty(value = "逻辑删除 0 未删, 1 删除")
-    @TableField(value = "grow_logic")
+    @TableField(value = "user_logic")
     @TableLogic
-    private String growLogic;
+    private Integer userLogic;
 }

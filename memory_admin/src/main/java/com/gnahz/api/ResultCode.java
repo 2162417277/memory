@@ -12,7 +12,9 @@ public enum ResultCode implements IErrorCode {
     VALIDATE_FAILED(404,"参数检验失败"),
     UNAUTHORIZED(401,"暂未登录或sess已经过期"),
     FORBIDDEN(403,"没有相关权限"),
+    LOGINHASFAILED(404,"账号重复"),
     UNKNOWN(9999,"未知异常,请联系管理员");
+
 
     private Long code;
     private String message;

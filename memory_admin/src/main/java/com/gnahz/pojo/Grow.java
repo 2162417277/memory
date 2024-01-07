@@ -66,5 +66,5 @@ public class Grow implements Serializable {
     @ApiModelProperty(value = "逻辑字段 0 未删, 1 删除")
     @TableField(value = "grow_logic")
     @TableLogic
-    private String growLogic;
+    private Integer growLogic;
 }

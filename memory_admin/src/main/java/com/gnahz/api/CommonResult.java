@@ -1,5 +1,7 @@
 package com.gnahz.api;
 
+import com.gnahz.pojo.User;
+
 /**
  * @Author 张伟洁
  * Date:2024-01-05-11:31
@@ -129,6 +131,15 @@ public class CommonResult<T> {
      */
     public static <T> CommonResult<T> forbidden(T data){
         return new CommonResult<T>(ResultCode.FAILED.getCode(), ResultCode.FAILED.getMessage(), data);
+    }
+
+    /**
+     * 账号重复
+     * @param <T>
+     * @return
+     */
+    public static <T> CommonResult<T> loginhasfailed() {
+        return new CommonResult<T>(ResultCode.LOGINHASFAILED.getCode(),ResultCode.LOGINHASFAILED.getMessage(), null);
     }
 
 

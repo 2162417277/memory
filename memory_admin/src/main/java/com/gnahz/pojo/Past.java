@@ -46,5 +46,5 @@ public class Past implements Serializable {
     @ApiModelProperty(value = "逻辑字段, 0 未删, 1 删除")
     @TableField(value = "past_logic")
     @TableLogic
-    private String pastLogic;
+    private Integer pastLogic;
 }

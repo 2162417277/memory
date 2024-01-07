@@ -8,7 +8,7 @@ package com.gnahz.api;
  */
 public interface IErrorCode {
     /**
-     * 获取错位编号code
+     * 获取错误编号code
      * @return
      */
     long getCode();

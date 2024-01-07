@@ -9,4 +9,12 @@ import com.gnahz.pojo.User;
  * @create 忆项目(小白)
  */
 public interface UserService extends IService<User> {
+
+    /**
+     * 注册用户
+     * @param user
+     * @return
+     */
+    User UserInsert(User user);
+
 }
