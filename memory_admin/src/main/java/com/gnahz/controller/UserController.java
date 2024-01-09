@@ -1,6 +1,7 @@
 package com.gnahz.controller;
 
 
+import com.baomidou.mybatisplus.extension.api.R;
 import com.gnahz.api.CommonResult;
 import com.gnahz.mapper.UserMapper;
 import com.gnahz.pojo.User;
@@ -10,6 +11,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
+import java.util.HashMap;
 
 
 /**
@@ -41,6 +45,28 @@ public class UserController {
             return CommonResult.loginhasfailed();
         }
         return CommonResult.success(adminUser);
+    }
+
+    /**
+     * 用户登录(待完善token JWT)
+     * http://localhost:9999/admin/user/logOn?userName=李四&&password=1234567
+     * @param userName
+     * @param password
+     * @return
+     */
+    @ApiOperation("用户登录")
+    @RequestMapping(value = "/user/logOn",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult UserLogOn(@PathParam("userName")String userName,
+                                  @PathParam("password")String password){
+        HashMap<String, String> logOn = userService.selectPasswordByName(userName, password);
+        //如果为空
+        if(logOn == null){
+            //说明用户名或密码错误，返回一个验证失败的结果，提示"用户名或密码错误"
+            return CommonResult.validateFailed("用户名或密码错误");
+        }
+        //说明用户名和密码匹配成功，返回一个成功的结果，将logOn作为数据返回
+        return CommonResult.success(logOn);
     }
 
 

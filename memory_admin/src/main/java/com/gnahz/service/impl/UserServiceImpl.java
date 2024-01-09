@@ -3,6 +3,7 @@ package com.gnahz.service.impl;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.gnahz.exception.Asserts;
 import com.gnahz.mapper.UserMapper;
 import com.gnahz.pojo.User;
 import com.gnahz.service.UserService;
@@ -10,12 +11,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashMap;
 
 /**
  * @Author 张伟洁
@@ -59,5 +56,41 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userMapper.insert(adminUser);
         //返回新创建的User对象
         return adminUser;
+    }
+
+    /**
+     * 用户登录
+     * 这个方法的主要作用是根据用户名和密码验证用户身份，并将查询结果以键值对的形式返回
+     * @param userName
+     * @param password
+     * @return
+     */
+    @Override
+    public HashMap<String, String> selectPasswordByName(String userName, String password) {
+        //创建一个空的HashMap对象logOn，用于存储查询结果
+        HashMap<String, String> logOn = new HashMap<>();
+        //使用try语句块捕获可能出现的异常。
+        try {
+            //传入用户名返回用户密码
+            String userAndPassword = userMapper.selectPasswordByName(userName);
+            //比较用户输入的密码password与从数据库中查询到的用户密码userAndPassword是否相等
+            if (!userAndPassword.equals(password)) {
+                //如果不相等，则抛出断言错误，提示"密码不正确
+                //Asserts.fail("密码不正确");
+                return null;
+            }
+            //如果密码匹配，将用户名和密码添加到logOn中
+            logOn.put("userName",userName);
+            logOn.put("password",password);
+        } catch (Exception e) {
+            //如果在执行过程中出现异常，捕获该异常，并抛出断言错误，提示"登录异常"以及异常信息
+            /**
+             * Asserts.fail("密码不正确");+ Asserts.fail("登录异常:" + e.getMessage());要配合使用
+             * 登录异常:密码不正确
+             */
+            Asserts.fail("登录异常:" + e.getMessage());
+        }
+        //返回查询结果logOn
+        return logOn;
     }
 }

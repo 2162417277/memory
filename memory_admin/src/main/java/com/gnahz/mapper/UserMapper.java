@@ -3,6 +3,8 @@ package com.gnahz.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gnahz.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 
 /**
  * @Author 张伟洁
@@ -11,4 +13,11 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
+
+    /**
+     * 根据用户userName查询用户密码
+     * @param userName
+     * @return
+     */
+    String selectPasswordByName(@Param("userName") String userName);
 }

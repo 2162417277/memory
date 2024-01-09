@@ -13,10 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -120,5 +117,17 @@ public class StartAppTest {
         User user = userMapper.selectById(1L);
         //userMapper.insert()
         System.out.println(user);
+    }
+
+    /**
+     * 根据用户userName查询用户密码
+     */
+    @Test
+    public void testUserNameAndPassword(){
+        String userName = "李四";
+        String password = "123456";
+        //String password = userMapper.selectPasswordByName(userName);
+        HashMap<String, String> stringStringHashMap = userService.selectPasswordByName(userName, password);
+        System.out.println(stringStringHashMap);
     }
 }

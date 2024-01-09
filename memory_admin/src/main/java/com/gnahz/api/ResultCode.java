@@ -16,6 +16,7 @@ public enum ResultCode implements IErrorCode {
     UNKNOWN(9999,"未知异常,请联系管理员");
 
 
+
     private Long code;
     private String message;
 
