@@ -10,6 +10,7 @@ import com.gnahz.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @param user
      * @return
      */
+    @Transactional//MyBatis会确保在方法执行过程中对数据库的操作具有原子性、一致性、隔离性和持久性（ACID）
     @Override
     public User UserInsert(User user) {
         User adminUser = new User();

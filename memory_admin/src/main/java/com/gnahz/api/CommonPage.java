@@ -2,6 +2,7 @@ package com.gnahz.api;
 
 
 import cn.hutool.core.convert.Convert;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 
@@ -22,21 +23,22 @@ public class CommonPage <T>{
 
     /**
      * 将MyBatis Plus 分页结果转化为通用结果
-     * @param pageResult
      * @param <T>
+     * @param pageResult
      * @return
      */
-    public static <T> CommonPage<T> restPage(Page<T> pageResult){
+    public static <T> CommonPage<T> restPage(Page<T> pageResult) {
         CommonPage<T> result = new CommonPage<>();
-        //当前页
+        // 当前页
         result.setPageNum(Convert.toInt(pageResult.getCurrent()));
-        //一页多少条数据
+        // 一页多少条数据
         result.setPageSize(Convert.toInt(pageResult.getSize()));
-        //总数据数量
+        // 总数据数量
         result.setTotal(pageResult.getTotal());
-        //总页数
+        // 总页数
         result.setTotalPage(Convert.toInt(pageResult.getTotal()/pageResult.getSize()+1));
-        //当前页数据
+        // 当前页数据
+        result.setList(pageResult.getRecords());
         return result;
     }
 

@@ -2,8 +2,14 @@ package com.gnahz;
 
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageInfo;
+import com.gnahz.mapper.GrowMapper;
 import com.gnahz.mapper.UserMapper;
+import com.gnahz.pojo.Grow;
 import com.gnahz.pojo.User;
+import com.gnahz.service.GrowService;
 import com.gnahz.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -44,6 +50,12 @@ public class StartAppTest {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    GrowService growService;
+
+    @Autowired
+    GrowMapper growMapper;
 
 
     @Test
@@ -129,5 +141,28 @@ public class StartAppTest {
         //String password = userMapper.selectPasswordByName(userName);
         HashMap<String, String> stringStringHashMap = userService.selectPasswordByName(userName, password);
         System.out.println(stringStringHashMap);
+    }
+
+    /**
+     * SELECT * FROM `grow` WHERE grow_user_id = 1;
+     */
+    @Test
+    public void queryGrow1(){
+        Integer id = 2;
+        QueryWrapper<Grow> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(Grow::getGrowUserId,id);
+        List<Grow> grows = growMapper.selectList(wrapper);
+        grows.forEach(System.out::println);
+        if(grows.size() == 0){
+            System.out.println("111");
+        }else {
+            System.out.println("2222");
+        }
+    }
+
+    @Test
+    public void queryGrow2(){
+        IPage iPage = growService.queryGrow(1, 1, 3);
+        System.out.println(iPage);
     }
 }

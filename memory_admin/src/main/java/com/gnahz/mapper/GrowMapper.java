@@ -3,6 +3,9 @@ package com.gnahz.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gnahz.pojo.Grow;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Author 张伟洁
@@ -11,4 +14,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface GrowMapper extends BaseMapper<Grow> {
+     List<Grow> queryAllByPage(@Param("id")Integer id);
 }
