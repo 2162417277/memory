@@ -1,13 +1,20 @@
 package com.gnahz.service.impl;
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gnahz.mapper.GrowMapper;
 import com.gnahz.pojo.Grow;
+import com.gnahz.pojo.User;
 import com.gnahz.service.GrowService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 /**
  * @Author 张伟洁
@@ -42,7 +49,57 @@ public class GrowServiceImpl extends ServiceImpl<GrowMapper, Grow> implements Gr
         return this.page(page,queryWrapper);
     }
 
+    /**
+     * 写给未来的信
+     * @param grow
+     * @param id
+     * @return
+     */
+    @Transactional
+    @Override
+    public Grow GrowInsert(Grow grow,Integer id) {
+        //创建了一个新的Grow对象，并将其引用赋值给变量NewGrow
+        Grow NewGrow = new Grow();
+        //将grow对象的所有属性值复制到NewGrow对象中。这意味着如果grow对象有某个属性，那么NewGrow对象也会有相同的属性，并且它们的值是一样的
+        BeanUtils.copyProperties(grow,NewGrow);
+        //获取当前日期和时间
+        Date date = DateUtil.date();
+        //将变量id的值设置为NewGrow对象的growUserId属性
+        NewGrow.setGrowUserId(id);
+        //将变量date的值设置为NewGrow对象的growOldTime属性
+        NewGrow.setGrowOldTime(date);
+        //0代表未删除
+        NewGrow.setGrowLogic(0);
+        //插入操作
+        growMapper.insert(NewGrow);
+        return NewGrow;
+    }
 
+    /** .
+     * 根据条件修改信息（可修改[主题,内容,视频\图片,发送时间,邮件地址,手机号,写者姓名,发送者姓名]）
+     * 有瑕疵后期补救（原因：前端如果什么数据都没有填写就提交数据也会刷新表单时间，我的办法在前端做逻辑判断后端就不需要写了）
+     * @param grow
+     * @return
+     */
+    @Override
+    public Grow growUpdate(Grow grow) {
+        //时间判断待完成（创建时间必须小于发送时间）可以用时间戳比较
+        //获取当前时间
+        DateTime date = DateUtil.date();
+        //添加到setGrowOldTime为表单创建时间
+        grow.setGrowOldTime(date);
+        growMapper.GrowUpdate(grow.getGrowId(),//id
+                grow.getGrowTheme(),//主题
+                grow.getGrowContent(),//内容
+                grow.getGrowVideo(),//视频\图片
+                grow.getGrowOldTime(),//创建时间
+                grow.getGrowNewTime(),//发送时间
+                grow.getGrowMail(),//邮件地址
+                grow.getGrowTelephone(),//手机号
+                grow.getWriteName(),//写者姓名
+                grow.getReadName());//发送者姓名
+        return grow;
+    }
 
 
 }

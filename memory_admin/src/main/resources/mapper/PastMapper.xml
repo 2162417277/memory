@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gnahz.mapper.PastMapper">
+    <!--根据条件传入消息,为null或为空表示未修改-->
+    <update id="PastUpdate">
+        UPDATE past
+        <set>
+            <if test="pastTheme != null and pastTheme != ''">
+                past_theme = #{pastTheme},
+            </if>
+            <if test="pastContent != null and pastContent != ''">
+                past_content = #{pastContent},
+            </if>
+            <if test="pastVideo != null and pastVideo != ''">
+                past_video = #{pastVideo},
+            </if>
+            <if test="pastOldTime != null">
+                past_old_time = #{pastOldTime},
+            </if>
+        </set>
+            /*id为修改条件*/
+        WHERE past_id = #{id}
+    </update>
+
 </mapper>

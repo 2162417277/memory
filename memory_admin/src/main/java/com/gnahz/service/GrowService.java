@@ -22,4 +22,19 @@ public interface GrowService extends IService<Grow> {
      */
     Page queryGrow(Integer id, Integer pageName, Integer pageSize);
 
+
+    /**
+     * 写给未来的信
+     * @param grow
+     * @param id
+     * @return
+     */
+    Grow GrowInsert(Grow grow,Integer id);
+
+    /**
+     * 根据条件修改信息（可修改[主题,内容,视频\图片,发送时间,邮件地址,手机号,写者姓名,发送者姓名]）
+     * @param grow
+     * @return
+     */
+    Grow growUpdate(Grow grow);
 }

@@ -1,8 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gnahz.mapper.GrowMapper">
+
     <select id="queryAllByPage" resultType="com.gnahz.pojo.Grow">
         /*SELECT * FROM `grow` WHERE grow_user_id = 1;*/
         select * from grow WHERE grow_user_id=#{id}
     </select>
+
+    <!--主题,内容,视频\图片,创建时间,发送时间,邮件地址,手机号,写者姓名,发送者姓名-->
+    <update id="GrowUpdate">
+        UPDATE grow
+        <set>
+            <if test="growTheme != null and growTheme != ''">
+                grow_theme=#{growTheme},
+            </if>
+            <if test="growContent != null and growContent != ''">
+                grow_content=#{growContent},
+            </if>
+            <if test="growVideo != null and growVideo != ''">
+                grow_video=#{growVideo},
+            </if>
+            <if test="growOldTime != null">
+                grow_old_time=#{growOldTime},
+            </if>
+            <if test="growNewTime != null">
+                grow_new_time=#{growNewTime},
+            </if>
+            <if test="growMail != null and growMail != ''">
+                grow_mail=#{growMail},
+            </if>
+            <if test="growTelephone != null and growTelephone != ''">
+                grow_telephone=#{growTelephone},
+            </if>
+            <if test="writeName != null and writeName != ''">
+                write_name=#{writeName},
+            </if>
+            <if test="readName != null and readName">
+                read_name=#{readName},
+            </if>
+        </set>
+        where grow_id=#{growId}
+
+    </update>
 </mapper>

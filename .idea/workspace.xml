@@ -4,47 +4,57 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4e2be70-f346-42fe-ae33-859488d7219c" name="变更" comment="用户登录功能（未完成）整体架构写差不多了">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_5_2_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_autoconfigure_1_3_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_starter_1_3_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_autoconfigure_2_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_starter_2_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/GrowController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/pojo/dto/GrowEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_annotation_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_boot_starter_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_core_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_extension_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_generator_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_4_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_4_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_5_7.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_1_3_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_2_0_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_configuration_processor_2_3_6_RELEASE.xml" beforeDir="false" />
+    <list default="true" id="f4e2be70-f346-42fe-ae33-859488d7219c" name="变更" comment="用户未来信分页查询">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_aliyun_java_sdk_core_3_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_aliyun_java_sdk_ecs_4_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_aliyun_java_sdk_kms_2_7_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_aliyun_java_sdk_ram_3_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_aliyun_java_sdk_sts_3_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_oss_aliyun_sdk_oss_3_10_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_14.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jettison_jettison_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jdom_jdom2_2_0_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__stax_stax_api_1_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/OssConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/PastController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/pojo/vo/FileUploadResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/FileUploadService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/utils/DateUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/utils/TimeStampUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_3_0_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_3_3_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_annotation_3_0_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_annotation_3_3_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_boot_starter_3_0_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_boot_starter_3_3_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_core_3_0_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_core_3_3_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_generator_3_0_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_baomidou_mybatis_plus_extension_3_3_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/memory_admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/memory_admin.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/api/CommonPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/api/CommonPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/MybatisPlusConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/GrowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/GrowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/mapper/GrowMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/mapper/GrowMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/mapper/PastMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/mapper/PastMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/GrowService.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/GrowService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/PastService.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/PastService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/GrowServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/GrowServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/PastServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/PastServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/src/main/resources/mapper/GrowMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/resources/mapper/GrowMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/resources/mapper/PastMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/resources/mapper/PastMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/src/test/java/com/gnahz/StartAppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/test/java/com/gnahz/StartAppTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/api/CommonPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/api/CommonPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/config/MybatisPlusConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/GrowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/GrowController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/mapper/GrowMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/mapper/GrowMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/mapper/PastMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/mapper/PastMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/GrowService.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/GrowService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/PastService.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/PastService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/impl/GrowServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/impl/GrowServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/impl/PastServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/impl/PastServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/mapper/GrowMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/mapper/GrowMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/mapper/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/mapper/PastMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/mapper/PastMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/target/test-classes/com/gnahz/StartAppTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/test-classes/com/gnahz/StartAppTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +83,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="用户注册" />
+        <entry key="$PROJECT_DIR$" value="用户登录" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -123,10 +133,11 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.27921405" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="cn.yiiguxing.plugin.translate" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -135,8 +146,8 @@
       <recent name="D:\develo\memory\memory_admin\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.MemoryAdminApplication">
-    <configuration name="StartAppTest.insertUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.StartAppTest.growUpdate">
+    <configuration name="StartAppTest.PastInsert" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="memory_admin" />
       <extension name="coverage">
         <pattern>
@@ -146,13 +157,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.gnahz" />
       <option name="MAIN_CLASS_NAME" value="com.gnahz.StartAppTest" />
-      <option name="METHOD_NAME" value="insertUser" />
+      <option name="METHOD_NAME" value="PastInsert" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StartAppTest.queryGrow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StartAppTest.growUpdate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="memory_admin" />
       <extension name="coverage">
         <pattern>
@@ -162,13 +173,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.gnahz" />
       <option name="MAIN_CLASS_NAME" value="com.gnahz.StartAppTest" />
-      <option name="METHOD_NAME" value="queryGrow" />
+      <option name="METHOD_NAME" value="growUpdate" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StartAppTest.queryGrow2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StartAppTest.past" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="memory_admin" />
       <extension name="coverage">
         <pattern>
@@ -178,13 +189,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.gnahz" />
       <option name="MAIN_CLASS_NAME" value="com.gnahz.StartAppTest" />
-      <option name="METHOD_NAME" value="queryGrow2" />
+      <option name="METHOD_NAME" value="past" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StartAppTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StartAppTest.pastUpdate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="memory_admin" />
       <extension name="coverage">
         <pattern>
@@ -194,13 +205,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.gnahz" />
       <option name="MAIN_CLASS_NAME" value="com.gnahz.StartAppTest" />
-      <option name="METHOD_NAME" value="test" />
+      <option name="METHOD_NAME" value="pastUpdate" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StartAppTest.testUserNameAndPassword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StartAppTest.testDate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="memory_admin" />
       <extension name="coverage">
         <pattern>
@@ -210,7 +221,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.gnahz" />
       <option name="MAIN_CLASS_NAME" value="com.gnahz.StartAppTest" />
-      <option name="METHOD_NAME" value="testUserNameAndPassword" />
+      <option name="METHOD_NAME" value="testDate" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -231,20 +242,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.StartAppTest.insertUser" />
-      <item itemvalue="JUnit.StartAppTest.test" />
-      <item itemvalue="JUnit.StartAppTest.testUserNameAndPassword" />
       <item itemvalue="Spring Boot.MemoryAdminApplication" />
-      <item itemvalue="JUnit.StartAppTest.queryGrow" />
-      <item itemvalue="JUnit.StartAppTest.queryGrow2" />
+      <item itemvalue="JUnit.StartAppTest.testDate" />
+      <item itemvalue="JUnit.StartAppTest.PastInsert" />
+      <item itemvalue="JUnit.StartAppTest.past" />
+      <item itemvalue="JUnit.StartAppTest.pastUpdate" />
+      <item itemvalue="JUnit.StartAppTest.growUpdate" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.StartAppTest.queryGrow2" />
-        <item itemvalue="JUnit.StartAppTest.queryGrow" />
-        <item itemvalue="JUnit.StartAppTest.testUserNameAndPassword" />
-        <item itemvalue="JUnit.StartAppTest.insertUser" />
-        <item itemvalue="JUnit.StartAppTest.test" />
+        <item itemvalue="JUnit.StartAppTest.growUpdate" />
+        <item itemvalue="JUnit.StartAppTest.pastUpdate" />
+        <item itemvalue="JUnit.StartAppTest.testDate" />
+        <item itemvalue="JUnit.StartAppTest.past" />
+        <item itemvalue="JUnit.StartAppTest.PastInsert" />
       </list>
     </recent_temporary>
   </component>
@@ -275,7 +286,8 @@
       <workItem from="1704631605082" duration="102000" />
       <workItem from="1704631738273" duration="865000" />
       <workItem from="1704775883940" duration="8384000" />
-      <workItem from="1704872806664" duration="10462000" />
+      <workItem from="1704872806664" duration="11467000" />
+      <workItem from="1704933236567" duration="26644000" />
     </task>
     <task id="LOCAL-00001" summary="配置父类maven">
       <created>1704346248831</created>
@@ -333,7 +345,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704794541240</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="用户未来信分页查询">
+      <created>1704891229472</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1704891229472</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,7 +376,8 @@
     <MESSAGE value="配置异常类,全局跨域,api接口(接口，统一返回值，分页，错误码（操作码）)" />
     <MESSAGE value="用户注册信息完成" />
     <MESSAGE value="用户登录功能（未完成）整体架构写差不多了" />
-    <option name="LAST_COMMIT_MESSAGE" value="用户登录功能（未完成）整体架构写差不多了" />
+    <MESSAGE value="用户未来信分页查询" />
+    <option name="LAST_COMMIT_MESSAGE" value="用户未来信分页查询" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

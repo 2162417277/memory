@@ -34,6 +34,10 @@ public class UserController {
 
     /**
      * 注册用户信息
+     * {
+     *     "userName": "朱榕",
+     *     "password": "213432"
+     * }
      * @return
      */
     @ApiOperation(value = "注册用户")
