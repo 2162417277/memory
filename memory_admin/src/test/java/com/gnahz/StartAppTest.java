@@ -14,9 +14,12 @@ import com.gnahz.mapper.UserMapper;
 import com.gnahz.pojo.Grow;
 import com.gnahz.pojo.Past;
 import com.gnahz.pojo.User;
+import com.gnahz.pojo.dto.OssPolicyResult;
 import com.gnahz.service.GrowService;
+import com.gnahz.service.OssService;
 import com.gnahz.service.PastService;
 import com.gnahz.service.UserService;
+import com.gnahz.service.impl.OssServiceImpl;
 import com.gnahz.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -29,6 +32,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @Author 张伟洁
@@ -70,6 +75,9 @@ public class StartAppTest {
 
     @Autowired
     PastService pastService;
+
+    @Autowired
+    OssService ossService;
 
 
     @Test
@@ -253,5 +261,24 @@ public class StartAppTest {
 //        DateTime dateTime = DateUtils.StringTransformDate(dateString);
         DateTime date = DateUtil.date();
         System.out.println(date);
+    }
+
+    @Test
+    public void OssTest(){
+        String url = "D:\\develo\\memory\\memory_admin\\src\\main\\resources\\333.jpg";
+        OssPolicyResult result = ossService.policy();
+        assertNotNull(result);
+        assertNotNull(result.getAccessKeyId());
+        assertNotNull(result.getPolicy());
+        assertNotNull(result.getSignature());
+        assertNotNull(result.getDir());
+        assertNotNull(result.getHost());
+    }
+
+    @Autowired
+    private OssServiceImpl ossServices;
+
+    public void uploadImage() {
+
     }
 }

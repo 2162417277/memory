@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>memory_admin</module>
+        <module>memory_security</module>
     </modules>
 
     <parent>

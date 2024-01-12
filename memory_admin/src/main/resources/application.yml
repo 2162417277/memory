@@ -37,6 +37,17 @@ aliyun:
     policy:
       expire: 300 # 签名有效期(S)
     maxSize: 10 # 上传文件大小(M)
-    #callback:  # 文件上传成功后的回调地址
+    callback: http://localhost:9999/admin/aliyun/oss/callback  # 文件上传成功后的回调地址
     dir:
       prefix: gnahz/yi # 上传文件夹路径前缀
+
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /admin/**
+
+jwt:
+  secret: memory_admin  #服务端私钥（一定不能泄露）
+  expiration: 86400   #过期时间 60*60*24  =一天
+  tokenHead: Bearer #jwt规范  #告诉客户端jwt令牌开头需要加的一个字符串
+  tokenHeader: Authorization #告诉客户端你要在请求头里面传什么参数名字
