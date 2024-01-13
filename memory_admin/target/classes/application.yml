@@ -5,9 +5,20 @@ spring:
   application:
     name: memory
   datasource:
-    url: jdbc:mysql://localhost:3306/memory?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-    username: root
-    password: hsp
+    url: jdbc:mysql://${memory.mysql.ip}:${memory.mysql.port}/${memory.mysql.db}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: ${memory.mysql.username}
+    password: ${memory.mysql.password}
+  redis:
+    # Redis服务器地址
+    host: ${mallchat.redis.host}
+    # Redis服务器端口号
+    port: ${mallchat.redis.port}
+    # 使用的数据库索引，默认是0
+    database: 0
+    # 连接超时时间
+    timeout: 1800000
+    # 设置密码
+    password: ${mallchat.redis.password}
 logging:
   level:
     root: info
@@ -30,10 +41,10 @@ mybatis-plus:
 
 aliyun:
   oss:
-    endpoint: oss-cn-hangzhou.aliyuncs.com # oss对外服务的访问域名
-    accessKeyId: LTAI5t5wMe9KqzE5vhZVhGia # 访问身份验证中用到用户标识
-    accessKeySecret: 16QS2DxrLpeZyBl9NOjUIBlZKupm7H # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
-    bucketName: gnahz-yi # oss的存储空间
+    endpoint: ${oss.endpoint} # oss对外服务的访问域名
+    accessKeyId: ${oss.access-key} # 访问身份验证中用到用户标识
+    accessKeySecret: ${oss.secret-key} # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
+    bucketName: ${oss.bucketName} # oss的存储空间
     policy:
       expire: 300 # 签名有效期(S)
     maxSize: 10 # 上传文件大小(M)
@@ -47,7 +58,7 @@ secure:
       - /admin/**
 
 jwt:
-  secret: memory_admin  #服务端私钥（一定不能泄露）
+  secret: ${memory.jwt.secret}  #服务端私钥（一定不能泄露）
   expiration: 86400   #过期时间 60*60*24  =一天
   tokenHead: Bearer #jwt规范  #告诉客户端jwt令牌开头需要加的一个字符串
   tokenHeader: Authorization #告诉客户端你要在请求头里面传什么参数名字

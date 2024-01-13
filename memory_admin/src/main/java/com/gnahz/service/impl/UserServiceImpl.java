@@ -3,10 +3,15 @@ package com.gnahz.service.impl;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.gnahz.common.utils.JwtTokenUtil;
+import com.gnahz.dao.UserDao;
 import com.gnahz.exception.Asserts;
+import com.gnahz.mapper.PastMapper;
 import com.gnahz.mapper.UserMapper;
+import com.gnahz.pojo.Past;
 import com.gnahz.pojo.User;
 import com.gnahz.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,10 +26,15 @@ import java.util.HashMap;
  * @create 忆项目(小白)
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+@Slf4j
+public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements UserService {
+
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
 
     /**
      * 注册用户
@@ -94,5 +104,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         //返回查询结果logOn
         return logOn;
+    }
+
+    /**
+     * TODO token
+     * @param oldToken
+     * @return
+     */
+    @Override
+    public String refreshToken(String oldToken) {
+        return jwtTokenUtil.refreshHeadToken(oldToken);
     }
 }

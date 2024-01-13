@@ -25,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -78,6 +79,16 @@ public class StartAppTest {
 
     @Autowired
     OssService ossService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+    
+    @Test
+    public void redis(){
+        redisTemplate.opsForValue().set("name","张伟洁");
+        String  name = (String) redisTemplate.opsForValue().get("name");
+        System.out.println(name);
+    }
 
 
     @Test

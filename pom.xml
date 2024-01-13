@@ -31,6 +31,7 @@
         <swagger-annotations.version>1.6.0</swagger-annotations.version>
         <velocity.version>2.2</velocity.version>
         <hutool.version>4.5.7</hutool.version>
+        <redis.version>2.6.7</redis.version>
     </properties>
 
     <dependencies>
@@ -121,6 +122,12 @@
                <groupId>cn.hutool</groupId>
                <artifactId>hutool-all</artifactId>
                <version>${hutool.version}</version>
+           </dependency>
+           <!--redis-->
+           <dependency>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-starter-data-redis</artifactId>
+               <version>${redis.version}</version>
            </dependency>
        </dependencies>
     </dependencyManagement>
