@@ -1,10 +1,14 @@
 package com.gnahz.dao;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gnahz.mapper.UserMapper;
 import com.gnahz.pojo.User;
+import com.gnahz.service.UserCacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author 张伟洁
@@ -14,9 +18,5 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDao extends ServiceImpl<UserMapper, User> {
 
-    @Autowired
-    UserMapper userMapper;
 
-    public void UserInsert(User user) {
-    }
 }

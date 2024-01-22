@@ -2,7 +2,6 @@ package com.gnahz.controller;
 
 import com.gnahz.api.CommonResult;
 import com.gnahz.pojo.dto.OssPolicyResult;
-import com.gnahz.service.OssService;
 import com.gnahz.service.impl.OssServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

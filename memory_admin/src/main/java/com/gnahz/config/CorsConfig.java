@@ -26,7 +26,8 @@ public class CorsConfig {
     public CorsFilter corsFilter(){
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("*");//1.设置访问源地址（允许所有域名进行跨域调用）
+        //corsConfiguration.addAllowedOrigin("*");//1.设置访问源地址（允许所有域名进行跨域调用）
+        corsConfiguration.addAllowedOriginPattern("*");
         corsConfiguration.setAllowCredentials(true);//允许跨域发送cookie
         corsConfiguration.addAllowedHeader("*");//2.设置访问源请求头（放行全部原始头信息）
         corsConfiguration.addAllowedMethod("*");//3.设置访问源请求方法（允许所有请求方法跨域调用）

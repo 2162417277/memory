@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/admin/past")
-@Api(value = "遗憾的信息")
+@Api(tags = "遗憾的信息")
 public class PastController {
 
     @Autowired
     PastService pastService;
 
     @ApiOperation("查询写给死去的自己(所有)")
-    @RequestMapping(value = "/queryPast/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/private/queryPast/{id}",method = RequestMethod.GET)
     public CommonResult<CommonPage> queryPast(@PathVariable Integer id,
                                               @RequestParam(value = "pageName",defaultValue = "1")Integer pageName,
                                               @RequestParam(value = "pageSize",defaultValue = "3")Integer pageSize){
@@ -42,7 +42,7 @@ public class PastController {
      * @return
      */
     @ApiOperation("给以前的自己一封信")
-    @RequestMapping(value = "/pastInset",method = RequestMethod.POST)
+    @RequestMapping(value = "/private/pastInset",method = RequestMethod.POST)
     public CommonResult<Past> PastInsert(@Validated @RequestBody Past past){
         //创建一个user对象
         User user = new User();
@@ -60,7 +60,7 @@ public class PastController {
      * @return
      */
     @ApiOperation("根据条件修改信息（过去）")
-    @RequestMapping(value ="/pastUpdate",method = RequestMethod.POST)
+    @RequestMapping(value ="/private/pastUpdate",method = RequestMethod.POST)
     public CommonResult<Past> pastUpdate(@Validated @RequestBody Past past){
         //前端传入一个表单只要不为空或null那么字段就进行修改
         Past pastUpdate = pastService.pastUpdate(past);

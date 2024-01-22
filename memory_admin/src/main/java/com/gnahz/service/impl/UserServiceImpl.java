@@ -3,22 +3,35 @@ package com.gnahz.service.impl;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.gnahz.common.utils.JwtTokenUtil;
 import com.gnahz.dao.UserDao;
+import com.gnahz.domin.MyUserDetails;
+import com.gnahz.exception.ApiException;
+import com.gnahz.service.UserCacheService;
+import com.gnahz.utils.JwtTokenUtil;
 import com.gnahz.exception.Asserts;
-import com.gnahz.mapper.PastMapper;
 import com.gnahz.mapper.UserMapper;
-import com.gnahz.pojo.Past;
 import com.gnahz.pojo.User;
 import com.gnahz.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @Author 张伟洁
@@ -29,12 +42,18 @@ import java.util.HashMap;
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements UserService {
 
-
     @Autowired
     UserMapper userMapper;
-
     @Autowired
     JwtTokenUtil jwtTokenUtil;
+
+    @Lazy
+    @Autowired
+    UserCacheService userCacheService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
+    UserDao userDao;
 
     /**
      * 注册用户
@@ -73,46 +92,66 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     /**
      * 用户登录
      * 这个方法的主要作用是根据用户名和密码验证用户身份，并将查询结果以键值对的形式返回
-     * @param userName
-     * @param password
      * @return
      */
     @Override
-    public HashMap<String, String> selectPasswordByName(String userName, String password) {
-        //创建一个空的HashMap对象logOn，用于存储查询结果
-        HashMap<String, String> logOn = new HashMap<>();
-        //使用try语句块捕获可能出现的异常。
+    public User selectPasswordByName(String username, String password) {
+
+        //密码需要客户端加密后传递
+        User user=null;
         try {
-            //传入用户名返回用户密码
-            String userAndPassword = userMapper.selectPasswordByName(userName);
-            //比较用户输入的密码password与从数据库中查询到的用户密码userAndPassword是否相等
-            if (!userAndPassword.equals(password)) {
-                //如果不相等，则抛出断言错误，提示"密码不正确
-                //Asserts.fail("密码不正确");
-                return null;
+            UserDetails userDetails =  loadUserByUsername(username);
+            user=((MyUserDetails)userDetails).getUser();
+
+            if(!passwordEncoder.matches(password,user.getPassword())){
+                Asserts.fail("密码不正确");
             }
-            //如果密码匹配，将用户名和密码添加到logOn中
-            logOn.put("userName",userName);
-            logOn.put("password",password);
+
+            // 生成springsecurity的通过认证标识
+            UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
+            if(!userDetails.isEnabled()){
+                Asserts.fail("帐号已被禁用");
+            }
         } catch (Exception e) {
-            //如果在执行过程中出现异常，捕获该异常，并抛出断言错误，提示"登录异常"以及异常信息
-            /**
-             * Asserts.fail("密码不正确");+ Asserts.fail("登录异常:" + e.getMessage());要配合使用
-             * 登录异常:密码不正确
-             */
-            Asserts.fail("登录异常:" + e.getMessage());
+            Asserts.fail("登录异常:"+e.getMessage());
         }
-        //返回查询结果logOn
-        return logOn;
+        return user;
     }
 
+    @Override
+    public User getAdminByUsername(String username) {
+        User user = userCacheService.getUser(username);
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(User::getUserName,username);
+        List<User> adminList = list(wrapper);
+        if (adminList != null && adminList.size() > 0) {
+            user = adminList.get(0);
+            userCacheService.setUser(user);
+            return user;
+        }
+        return null;
+    }
+
+
     /**
-     * TODO token
-     * @param oldToken
+     * 获得当前用户
      * @return
      */
+    public User getCurrentMember(){
+        // 标识
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails memberDetails =(MyUserDetails) authentication.getPrincipal();
+        return memberDetails.getUser();
+    }
+
     @Override
-    public String refreshToken(String oldToken) {
-        return jwtTokenUtil.refreshHeadToken(oldToken);
+    public MyUserDetails loadUserByUsername(String username) {
+        User umsMember = getAdminByUsername(username);
+        if(umsMember!=null){
+            return new MyUserDetails(umsMember);
+        }
+        throw  new ApiException("用户名或密码错误!");
     }
 }

@@ -2,10 +2,9 @@ package com.gnahz;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.crypto.digest.BCrypt;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.pagehelper.PageInfo;
 import com.gnahz.api.CommonPage;
 import com.gnahz.api.CommonResult;
 import com.gnahz.mapper.GrowMapper;
@@ -20,21 +19,21 @@ import com.gnahz.service.OssService;
 import com.gnahz.service.PastService;
 import com.gnahz.service.UserService;
 import com.gnahz.service.impl.OssServiceImpl;
+import com.gnahz.service.impl.RedisServiceImpl;
+import com.gnahz.service.impl.UserCacheServiceImpl;
 import com.gnahz.utils.DateUtils;
+import com.gnahz.utils.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 /**
  * @Author 张伟洁
@@ -82,6 +81,78 @@ public class StartAppTest {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private RedisServiceImpl redisServiceImpl;
+
+    @Autowired
+    private UserCacheServiceImpl userCacheService;
+
+
+    @Test
+    public void rediss(){
+        User user = userCacheService.getUser("admin");
+        System.out.println(user);
+    }
+
+
+    /**
+     * token
+     */
+    @Test
+    public void jwt(){
+        //
+        //Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX25hbWUiOiLmnY7lm5siLCJjcmVhdGVkIjoxNzA1OTI4MzExMDA5LCJleHAiOjE3MDYwMTQ3MTF9.y_PsymS9jx0qYCjYSVJE6T-XapyCu8c4DuSzZmALk7Im8N-lFa8ZABl-ELUTzR7mMbaa19UYXkCIaO-NYZcOfA
+        String nameStr = jwtTokenUtil.generateUserNameStr("雄安塔");
+        System.out.println(nameStr);
+//        String username = "李四";
+//        String username = "admin";
+//
+//        String str = jwtTokenUtil.generateUserNameStr(username);
+//        System.out.println(str);
+    }
+
+    @Test
+    public void redisEs(){
+        redisServiceImpl.set("name","admin");
+        String name = (String) redisServiceImpl.get("name");
+        System.out.println(name);
+    }
+
+    @Test
+    public void eq(){
+        String name1 = "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsImNyZWF0ZWQiOjE3MDU5MTEzNzc5NDcsImV4cCI6MTcwNTk5Nzc3N30.b4Z_n7t8eDOM1IP7Z2gCkRG6t2HmhbYSmg_GGrJ5JDZe1n6mZ5zmpRq8Le9Cc5S0q4Oe04VuwpN2DiDJduspRA";
+        String name2 = "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX25hbWUiOiLmnY7lm5siLCJjcmVhdGVkIjoxNzA1OTExMjcyMzQ4LCJleHAiOjE3MDU5OTc2NzJ9.q42hxfJOvNr5vH9fLez-JS4jjw4x44PDx4bfpHSW9G3NfJ4Pay0RRGhGTz9LYNbs0ACpe0Tpeb2Jo4Eo7D5-zw";
+        if(name1 == name2){
+            System.out.println("1");
+        }else {
+            System.out.println("2");
+        }
+    }
+
+
+    @Test
+    public void md5(){
+        //将密码进行加密操作
+//        String encodePassword = BCrypt.hashpw(umsMember.getPassword());
+//        umsMember.setPassword(encodePassword);
+//        baseMapper.insert(umsMember);
+//        return umsMember;
+        String username = "雄安塔";
+        String password = "1234567";
+        String encodePassword = BCrypt.hashpw(password);
+        Date date = DateUtil.date();
+        User user = new User();
+        user.setUserName(username);
+        user.setPassword(encodePassword);
+        user.setUserDate(date);
+        user.setUserLogic(0);
+        userMapper.insert(user);
+
+    }
     
     @Test
     public void redis(){
@@ -170,10 +241,10 @@ public class StartAppTest {
     @Test
     public void testUserNameAndPassword(){
         String userName = "李四";
-        String password = "123456";
+        String password = "1234567";
         //String password = userMapper.selectPasswordByName(userName);
-        HashMap<String, String> stringStringHashMap = userService.selectPasswordByName(userName, password);
-        System.out.println(stringStringHashMap);
+        //HashMap<String, String> stringStringHashMap = userService.selectPasswordByName(userName, password);
+        //System.out.println(stringStringHashMap);
     }
 
     /**
@@ -192,7 +263,7 @@ public class StartAppTest {
             System.out.println("2222");
         }
     }
-
+    
     @Test
     public void queryGrow2(){
 //        Page page = pastService.queryPast(1, 1, 3);

@@ -1,7 +1,7 @@
 package com.gnahz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.gnahz.pojo.Past;
+import com.gnahz.domin.MyUserDetails;
 import com.gnahz.pojo.User;
 
 import java.util.HashMap;
@@ -26,13 +26,15 @@ public interface UserService extends IService<User>{
      * @param password
      * @return
      */
-    HashMap<String, String> selectPasswordByName(String userName, String password);
+    User selectPasswordByName(String userName, String password);
+
+
+    User getAdminByUsername(String username);
 
     /**
-     * token
-     * @param oldToken
+     * 获得当前用户
+     * @param username
      * @return
      */
-    String refreshToken(String oldToken);
-
+    MyUserDetails loadUserByUsername(String username);
 }

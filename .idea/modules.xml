@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/memory.iml" filepath="$PROJECT_DIR$/memory.iml" />
       <module fileurl="file://$PROJECT_DIR$/memory_admin/memory_admin.iml" filepath="$PROJECT_DIR$/memory_admin/memory_admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/memory_common/memory_common.iml" filepath="$PROJECT_DIR$/memory_common/memory_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/memory_security/memory_security.iml" filepath="$PROJECT_DIR$/memory_security/memory_security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
     </modules>
   </component>
 </project>

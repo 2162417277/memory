@@ -10,15 +10,14 @@ spring:
     password: ${memory.mysql.password}
   redis:
     # Redis服务器地址
-    host: ${mallchat.redis.host}
+    host: ${memory.redis.host}
+      # 使用的数据库索引，默认是0
+    database: ${memory.redis.database}
     # Redis服务器端口号
-    port: ${mallchat.redis.port}
-    # 使用的数据库索引，默认是0
-    database: 0
-    # 连接超时时间
-    timeout: 1800000
-    # 设置密码
-    password: ${mallchat.redis.password}
+    port: ${memory.redis.port}
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
 logging:
   level:
     root: info
@@ -52,13 +51,23 @@ aliyun:
     dir:
       prefix: gnahz/yi # 上传文件夹路径前缀
 
-secure:
-  ignored:
-    urls: #安全路径白名单
-      - /admin/**
+#secure:
+#  ignored:
+#    urls: #安全路径白名单
+#      - /admin/**
 
 jwt:
   secret: ${memory.jwt.secret}  #服务端私钥（一定不能泄露）
   expiration: 86400   #过期时间 60*60*24  =一天
   tokenHead: Bearer #jwt规范  #告诉客户端jwt令牌开头需要加的一个字符串
   tokenHeader: Authorization #告诉客户端你要在请求头里面传什么参数名字
+
+redis:
+  #memory
+  database: memory
+  expire:
+    common: 86400 # 24小时
+  key:
+    user: 'ums:member:'
+    prefix:
+      orderId: 'portal:orderId:'

@@ -1,0 +1,9 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: memory
+  datasource:
+    url: jdbc:mysql://${memory.mysql.ip}:${memory.mysql.port}/${memory.mysql.db}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: ${memory.mysql.username}
+    password: ${memory.mysql.password}

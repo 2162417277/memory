@@ -4,24 +4,195 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4e2be70-f346-42fe-ae33-859488d7219c" name="变更" comment="Oss功能实现（一半）">
-      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/common/utils/JwtTokenUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/JwtTokenConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/dao/UserDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/resources/application.properties" afterDir="false" />
+    <list default="true" id="f4e2be70-f346-42fe-ae33-859488d7219c" name="变更" comment="JWT">
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/MySecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/RedisConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/RedissonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/domin/MyUserDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/RedisService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/UserCacheService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/RedisServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/UserCacheServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/vo/UserAndPsVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_common/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz/config/BaseRedisConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz/service/RedisService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz/service/impl/RedisServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_security/src/main/java/com/gnahz/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_security/src/main/java/com/gnahz/config/component/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_security/src/main/java/com/gnahz/config/component/ResfulAathenticationEntryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/memory_security/src/main/java/com/gnahz/config/component/ResltFulAccesDeniedHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/gnahz/StartTApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/gnahz/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/gnahz/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/gnahz/pojo/UserPO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/gnahz/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/java/com/gnahz/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_11_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_11_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_11_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_11_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_11_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_11_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_5_2_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_autoconfigure_1_3_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_starter_1_3_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_3_4_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_14.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_micrometer_micrometer_core_1_5_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger_ui_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_10_18.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_10_18.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_13_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_13_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_39.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_39.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_3_16_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jakarta_el_3_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_1_6_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_4_1_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jdom_jdom2_2_0_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_6_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_6_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_6_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_6_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_6_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_6_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_vintage_junit_vintage_engine_5_6_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_3_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_junit_jupiter_3_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_5_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_2_0_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_autoconfigure_2_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_starter_2_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_5_0_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_30.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_30.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_actuator_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_actuator_autoconfigure_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_actuator_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_3_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_5_3_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_5_3_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_5_3_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_2_11_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_2_11_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_2_11_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_2_11_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_2_11_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_2_11_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_2_11_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_2_11_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_2_11_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_2_11_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_2_11_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_26.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory.iml" beforeDir="false" afterPath="$PROJECT_DIR$/memory.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/memory_admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/memory_admin.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/StartApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/StartApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/api/CommonPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz/api/CommonPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/api/CommonResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz/api/CommonResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/api/IErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz/api/IErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/api/ResultCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz/api/ResultCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/common/utils/JwtTokenUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz/utils/JwtTokenUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/JwtTokenConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/JwtTokenConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/SecureIgnoreUrlsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_security/src/main/java/com/gnahz/config/SecureIgnoreUrlsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/Swagger2Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/Swagger2Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/GrowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/GrowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/OssController.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/OssController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/PastController.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/PastController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/dao/UserDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/PastServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/PastServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory_admin/src/test/java/com/gnahz/StartAppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/test/java/com/gnahz/StartAppTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/impl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/test-classes/com/gnahz/StartAppTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/test-classes/com/gnahz/StartAppTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/StartApp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/api/CommonPage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/api/CommonResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/api/IErrorCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/api/ResultCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/common/utils/JwtTokenUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/common/utils/RedisConfig$MyRedisSerializerCustomized.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/config/CorsConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/config/JwtTokenConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/config/OssConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/config/SecureIgnoreUrlsConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/config/Swagger2Config.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/GrowController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/Oss2Controller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/OssController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/PastController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/dao/UserDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/exception/ApiException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/exception/Asserts.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/exception/GlobalExceptionHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/mapper/GrowMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/mapper/PastMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/mapper/UserMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/pojo/Grow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/pojo/Past.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/pojo/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/pojo/dto/GrowEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/pojo/dto/OssCallbackParam.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/pojo/dto/OssCallbackResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/pojo/dto/OssPolicyResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/GrowService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/OssService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/PastService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/impl/GrowServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/impl/OssServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/impl/PastServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/service/impl/UserServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/utils/DateUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/utils/TimeStampUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/mapper/GrowMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/mapper/PastMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/mapper/UserMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/target/test-classes/com/gnahz/StartAppTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_security/memory_security.iml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_security/memory_security.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_security/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_security/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +223,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="未来信" />
+        <entry key="$PROJECT_DIR$" value="Oss" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -78,6 +249,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2aTboAoTger14QF5Uw6g8txWtB2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -98,7 +272,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/memory_admin/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -107,17 +281,27 @@
     <property name="project.structure.last.edited" value="模块" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.27921405" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reactor" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\develo\memory\memory_common\src\main\java\com\gnahz" />
+      <recent name="D:\develo\memory\memory_admin\src\main\java\com\gnahz" />
+      <recent name="D:\develo\memory\test\src\main\resources" />
       <recent name="D:\develo\memory\memory_admin\src\main\resources" />
       <recent name="D:\develo\memory\memory_admin\src\main\resources\mapper" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.gnahz.config" />
+      <recent name="com.gnahz.controller" />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.StartAppTest.redis">
-    <configuration name="StartAppTest.OssTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Spring Boot.StartApp">
+    <configuration name="StartAppTest.jwt" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="memory_admin" />
       <extension name="coverage">
         <pattern>
@@ -127,13 +311,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.gnahz" />
       <option name="MAIN_CLASS_NAME" value="com.gnahz.StartAppTest" />
-      <option name="METHOD_NAME" value="OssTest" />
+      <option name="METHOD_NAME" value="jwt" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StartAppTest.growUpdate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StartAppTest.md5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="memory_admin" />
       <extension name="coverage">
         <pattern>
@@ -143,13 +327,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.gnahz" />
       <option name="MAIN_CLASS_NAME" value="com.gnahz.StartAppTest" />
-      <option name="METHOD_NAME" value="growUpdate" />
+      <option name="METHOD_NAME" value="md5" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StartAppTest.redis" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StartAppTest.rediss" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="memory_admin" />
       <extension name="coverage">
         <pattern>
@@ -159,7 +343,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.gnahz" />
       <option name="MAIN_CLASS_NAME" value="com.gnahz.StartAppTest" />
-      <option name="METHOD_NAME" value="redis" />
+      <option name="METHOD_NAME" value="rediss" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -172,16 +356,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MemoryAdminApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
+    <configuration name="StartApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="memory_admin" />
-      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
-        <option name="credential" />
-        <option name="region" />
-        <option name="useCurrentConnection" value="false" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gnahz.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
       </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.gnahz.StartApp" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -200,20 +383,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.StartAppTest.growUpdate" />
-      <item itemvalue="JUnit.StartAppTest.OssTest" />
-      <item itemvalue="Spring Boot.MemoryAdminApplication" />
       <item itemvalue="Spring Boot.DemoApplication" />
+      <item itemvalue="JUnit.StartAppTest.rediss" />
       <item itemvalue="Spring Boot.StartSecurityApp" />
-      <item itemvalue="JUnit.StartAppTest.redis" />
+      <item itemvalue="Spring Boot.StartApp" />
+      <item itemvalue="JUnit.StartAppTest.md5" />
+      <item itemvalue="JUnit.StartAppTest.jwt" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.StartAppTest.redis" />
-        <item itemvalue="Spring Boot.MemoryAdminApplication" />
+        <item itemvalue="Spring Boot.StartApp" />
+        <item itemvalue="JUnit.StartAppTest.jwt" />
         <item itemvalue="Spring Boot.StartSecurityApp" />
-        <item itemvalue="JUnit.StartAppTest.OssTest" />
-        <item itemvalue="JUnit.StartAppTest.growUpdate" />
+        <item itemvalue="JUnit.StartAppTest.md5" />
+        <item itemvalue="JUnit.StartAppTest.rediss" />
       </list>
     </recent_temporary>
   </component>
@@ -251,7 +434,16 @@
       <workItem from="1704981641125" duration="63000" />
       <workItem from="1705019885059" duration="19871000" />
       <workItem from="1705143554997" duration="5520000" />
-      <workItem from="1705149144384" duration="4515000" />
+      <workItem from="1705149144384" duration="4759000" />
+      <workItem from="1705154070337" duration="354000" />
+      <workItem from="1705197033669" duration="298000" />
+      <workItem from="1705198290987" duration="5583000" />
+      <workItem from="1705222181796" duration="3707000" />
+      <workItem from="1705741365918" duration="1292000" />
+      <workItem from="1705831229968" duration="3665000" />
+      <workItem from="1705882585253" duration="11299000" />
+      <workItem from="1705894521224" duration="3853000" />
+      <workItem from="1705903429088" duration="14818000" />
     </task>
     <task id="LOCAL-00001" summary="配置父类maven">
       <created>1704346248831</created>
@@ -330,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705063755449</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="JWT">
+      <created>1705153909888</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1705153909888</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,7 +556,8 @@
     <MESSAGE value="用户未来信分页查询" />
     <MESSAGE value="表单修改功能" />
     <MESSAGE value="Oss功能实现（一半）" />
-    <option name="LAST_COMMIT_MESSAGE" value="Oss功能实现（一半）" />
+    <MESSAGE value="JWT" />
+    <option name="LAST_COMMIT_MESSAGE" value="JWT" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

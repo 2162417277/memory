@@ -1,8 +1,7 @@
 package com.gnahz.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.pagehelper.PageInfo;
 import com.gnahz.api.CommonPage;
 import com.gnahz.api.CommonResult;
 import com.gnahz.pojo.Grow;
@@ -14,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
-
 /**
  * @Author 张伟洁
  * Date:2024-01-10-18:22
@@ -23,7 +20,7 @@ import javax.websocket.server.PathParam;
  */
 @RestController
 @RequestMapping("/admin/grow")
-@Api(value = "写给未来")
+@Api(tags = "写给未来")
 public class GrowController {
 
     @Autowired
