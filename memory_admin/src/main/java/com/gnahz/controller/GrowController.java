@@ -4,6 +4,7 @@ package com.gnahz.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gnahz.api.CommonPage;
 import com.gnahz.api.CommonResult;
+import com.gnahz.common.RateLimiting;
 import com.gnahz.pojo.Grow;
 import com.gnahz.pojo.User;
 import com.gnahz.service.GrowService;
@@ -12,6 +13,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author 张伟洁
@@ -51,18 +54,17 @@ public class GrowController {
      * 该对象通过请求体（RequestBody）传递。在方法内部，使用了@Validated注解来对请求参数进行校验，确保其符合预期的格式和约束条件
      * 这段代码中的@Validated注解表示对传入的Grow对象进行验证，确保其符合预期的数据格式和约束条件。
      * 而@RequestBody注解表示将请求体中的数据绑定到方法参数上
+     * 限流时间大概4分钟，使用令牌桶算法
      * @param grow
      * @return
      */
     @ApiOperation("写给未来的信")
+    @RateLimiting(key = "growInsert", permitsPerSecond = 1, timeout = 500, timeunit = TimeUnit.MILLISECONDS,msg = "使用太频繁，请稍后再试！")
+    //@RateLimiting(key = "growInsert", permitsPerSecond = 2.0/500, timeout = 30000, timeunit = TimeUnit.MINUTES,msg = "使用太频繁，请四分钟后再试！")
     @RequestMapping(value = "/growInsert",method = RequestMethod.POST)
     public CommonResult<Grow> growInsert(@Validated @RequestBody Grow grow){
-        //创建一个User对象，用于获取当前用户的ID
-        User user = new User();
-        //调用user.getUserId()方法获取当前用户的ID，并将其存储在变量userId中
-        Integer userId = user.getUserId();
         //调用growService.GrowInsert(grow, userId)方法将传入的Grow对象和当前用户的ID一起插入到数据库中。该方法会返回插入后的Grow对象，将其存储在变量insert中
-        Grow insert = growService.GrowInsert(grow, userId);
+        Grow insert = growService.GrowInsert(grow);
         //使用CommonResult.success(insert)方法将插入后的Grow对象包装成一个成功的CommonResult对象，并将其作为方法的返回值
         return CommonResult.success(insert);
     }

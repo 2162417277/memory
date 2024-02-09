@@ -5,16 +5,25 @@ import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.gnahz.config.MyThreadLocal.UserAndPsVoContext;
+import com.gnahz.email.service.impl.QQEmailServiceImpl;
 import com.gnahz.mapper.GrowMapper;
+import com.gnahz.mapper.UserMapper;
 import com.gnahz.pojo.Grow;
 import com.gnahz.pojo.User;
 import com.gnahz.service.GrowService;
+import com.gnahz.utils.TimeStampUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author 张伟洁
@@ -26,6 +35,13 @@ public class GrowServiceImpl extends ServiceImpl<GrowMapper, Grow> implements Gr
 
     @Autowired
     GrowMapper growMapper;
+    @Autowired
+    UserMapper userMapper;
+
+
+    public String getCron() {
+        return growMapper.getCron();
+    }
 
    /**
      * 查询所有未来信（分页）
@@ -52,20 +68,38 @@ public class GrowServiceImpl extends ServiceImpl<GrowMapper, Grow> implements Gr
     /**
      * 写给未来的信
      * @param grow
-     * @param id
      * @return
      */
     @Transactional
     @Override
-    public Grow GrowInsert(Grow grow,Integer id) {
+    public Grow GrowInsert(Grow grow) {
         //创建了一个新的Grow对象，并将其引用赋值给变量NewGrow
         Grow NewGrow = new Grow();
+
+        // 获取当前时间
+//        Calendar calendar = Calendar.getInstance();
+//
+//        // 在当前时间上加两个月
+//        calendar.add(Calendar.MONTH, 2);
+//        Date newDate = calendar.getTime();
+//
+//        // 格式化日期输出
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        String formatDate = sdf.format(newDate);
+        //获取当前时间
+        Date date = DateUtil.date();
+//        Long stamp = TimeStampUtils.TimeStamp(date.toString());
+//        Long currentDates = TimeStampUtils.TimeStamp(formatDate);
+//        Long PageDate = TimeStampUtils.TimeStamp(grow.getGrowNewTime().toString());
+       // if()
         //将grow对象的所有属性值复制到NewGrow对象中。这意味着如果grow对象有某个属性，那么NewGrow对象也会有相同的属性，并且它们的值是一样的
         BeanUtils.copyProperties(grow,NewGrow);
-        //获取当前日期和时间
-        Date date = DateUtil.date();
+
         //将变量id的值设置为NewGrow对象的growUserId属性
-        NewGrow.setGrowUserId(id);
+        String username = UserAndPsVoContext.get();
+        Integer userId = userMapper.findByUsername(username);
+        NewGrow.setGrowUserId(userId);
+
         //将变量date的值设置为NewGrow对象的growOldTime属性
         NewGrow.setGrowOldTime(date);
         //0代表未删除
@@ -101,5 +135,18 @@ public class GrowServiceImpl extends ServiceImpl<GrowMapper, Grow> implements Gr
         return grow;
     }
 
+    /**
+     * 查询数据库里面所有的发送时间
+     * @return
+     */
+    @Override
+    public List<String> InsertMysqlNewDate() {
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        List<String> insertDateAll = growMapper.InsertDateAll();
+        for (String insetAll : insertDateAll) {
+            stringArrayList.add(insetAll);
+        }
+        return stringArrayList;
+    }
 
 }

@@ -4,9 +4,11 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gnahz.api.CommonPage;
 import com.gnahz.api.CommonResult;
+import com.gnahz.email.service.impl.QQEmailServiceImpl;
 import com.gnahz.mapper.GrowMapper;
 import com.gnahz.mapper.PastMapper;
 import com.gnahz.mapper.UserMapper;
@@ -18,17 +20,21 @@ import com.gnahz.service.GrowService;
 import com.gnahz.service.OssService;
 import com.gnahz.service.PastService;
 import com.gnahz.service.UserService;
+import com.gnahz.service.impl.GrowServiceImpl;
 import com.gnahz.service.impl.OssServiceImpl;
 import com.gnahz.service.impl.RedisServiceImpl;
 import com.gnahz.service.impl.UserCacheServiceImpl;
 import com.gnahz.utils.DateUtils;
 import com.gnahz.utils.JwtTokenUtil;
+import com.gnahz.utils.TimeStampUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -43,6 +49,66 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest(classes = {StartApp.class})//测试方法
 @Slf4j//日志
 public class StartAppTest {
+
+
+
+    @Test
+    public void test8(){
+        String date = "2024-2-8 06:09";
+        Long timeStamp = TimeStampUtils.TimeStamp(date);
+        System.out.println(timeStamp);
+    }
+
+    @Test
+    public void test9(){
+        long timestamp = 1707343740;
+        String stamp = TimeStampUtils.DateStamp(timestamp);
+        System.out.println(stamp);
+//        //long timestamp = System.currentTimeMillis(); // 获取当前时间戳
+//        //1707316626193
+//        Date date = new Date(timestamp * 1000); // 将时间戳转换为Date对象
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm"); // 设置日期格式
+//        String formattedDate = sdf.format(date); // 将Date对象转换为格式化的字符串
+//
+//        System.out.println("时间戳：" + timestamp);
+//        System.out.println("日期：" + formattedDate);
+    }
+
+    @Test
+    public void test11(){
+        String date = "2024-02-07 22:59"; //2024-04-07 22:51
+        String formatDate = "2024-07-07 12:59";
+        String time = "2024-09-07 12:59";
+        Long stamp = TimeStampUtils.TimeStamp(date);
+        Long currentDates = TimeStampUtils.TimeStamp(formatDate);
+        Long PageDate = TimeStampUtils.TimeStamp(time);
+        System.out.println("stamp"+stamp);
+        System.out.println("currentDates"+currentDates);//5184000
+        System.out.println("PageDate"+PageDate);
+        System.out.println(currentDates - stamp);
+        if(currentDates - PageDate == stamp){
+            System.out.println("111");
+        }else {
+            System.out.println("22222");
+        }
+    }
+
+    @Test
+    public void test10(){
+        // 获取当前时间
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // 在当前时间上加两个月
+        calendar.add(Calendar.MONTH, 2);
+        Date newDate = calendar.getTime();
+
+        // 格式化日期输出
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        System.out.println("当前日期：" + sdf.format(currentDate));
+        System.out.println("加两个月后的日期：" + sdf.format(newDate));
+    }
 
     @Test
     public void tset(){
@@ -91,6 +157,64 @@ public class StartAppTest {
     @Autowired
     private UserCacheServiceImpl userCacheService;
 
+    @Autowired
+    private QQEmailServiceImpl QQEmailService;
+
+    @Autowired
+    private GrowServiceImpl growServiceImpl;
+
+
+    @Test
+    public void test3(){
+        QueryWrapper<Grow> queryWrapper = new QueryWrapper<>();
+        String date = "2024-07-30 16:02:15";
+        queryWrapper.lambda().eq(Grow::getGrowNewTime,date);
+        int result = growMapper.delete(queryWrapper);
+        System.out.println(result > 0 ? "删除成功！" : "删除失败！");
+        System.out.println("受影响的行数为：" + result);
+    }
+
+    @Test
+    public void insert(){
+        QueryWrapper<Grow> queryWrapper = new QueryWrapper<>();
+        String date = "2024-07-30 16:02:15";
+        queryWrapper.lambda().eq(Grow::getGrowNewTime,date);
+        List<Grow> grows = growMapper.selectList(queryWrapper);
+        grows.forEach(System.out::println);
+    }
+
+
+
+    @Test
+    public void QQEmail() throws ParseException {
+        QueryWrapper<Grow> queryWrapper = new QueryWrapper<>();
+        int id= 3;
+        String date = "2024-02-3 20:18:08";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parse  = simpleDateFormat.parse(date);
+        System.out.println(parse);
+        queryWrapper.lambda().eq(Grow::getGrowNewTime,parse);
+        List<Grow> grows = growMapper.selectList(queryWrapper);
+
+        String growTheme = grows.get(0).getGrowTheme();
+        String growContent = grows.get(0).getGrowContent();
+        String growMail = grows.get(0).getGrowMail();
+        QQEmailService.sendCommonEmail(growTheme,growContent,growMail);
+        System.out.println(growTheme);
+        grows.forEach(System.out::println);
+    }
+
+    /**
+     * cron
+     */
+    @Test
+    public void cron(){
+        //2024-02-10 06:20:08
+        String cron = "00 15 16 01 02 ? 2024";
+        String time = growMapper.OldTime(cron);
+        System.out.println(time);
+    }
+
 
     @Test
     public void rediss(){
@@ -99,6 +223,36 @@ public class StartAppTest {
     }
 
 
+    @Test
+    public void test6(){
+        String format1 = "2024-02-04 10:15:00";
+        QueryWrapper<Grow> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(Grow::getGrowNewTime,format1);
+        List<Grow> grows = growMapper.selectList(queryWrapper);
+        for (int i = 0; i < grows.size(); i++) {
+            System.out.println(grows.get(i).getGrowTheme());
+        }
+        String growTheme = grows.get(0).getGrowTheme();
+        System.out.println(growTheme);
+        grows.forEach(System.out::println);
+    }
+
+
+
+    /**
+     * 测试邮件
+     */
+    @Test
+    public void TestEmail(){
+        boolean result = QQEmailService.EmailTest();
+        System.out.println(result == true ? 1 : 2);
+    }
+
+    @Test
+    public void admin(){
+        User username = userService.getAdminByUsername("李四");
+        System.out.println(username);
+    }
     /**
      * token
      */
@@ -106,7 +260,7 @@ public class StartAppTest {
     public void jwt(){
         //
         //Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX25hbWUiOiLmnY7lm5siLCJjcmVhdGVkIjoxNzA1OTI4MzExMDA5LCJleHAiOjE3MDYwMTQ3MTF9.y_PsymS9jx0qYCjYSVJE6T-XapyCu8c4DuSzZmALk7Im8N-lFa8ZABl-ELUTzR7mMbaa19UYXkCIaO-NYZcOfA
-        String nameStr = jwtTokenUtil.generateUserNameStr("雄安塔");
+        String nameStr = jwtTokenUtil.generateUserNameStr("朱先生");
         System.out.println(nameStr);
 //        String username = "李四";
 //        String username = "admin";
@@ -133,6 +287,24 @@ public class StartAppTest {
         }
     }
 
+    @Test
+    public void md5AndUser(){
+        User user = new User();
+        UpdateWrapper<User> wrapper = new UpdateWrapper<>();
+        String username = "李绅";
+        String password = "qwert";
+        String encodePassword = BCrypt.hashpw(password);
+        wrapper.lambda().eq(User::getUserName,username).set(User::getPassword,encodePassword);
+        int result = userMapper.update(user, wrapper);
+        System.out.println(result > 0 ? "修改成功！" : "修改失败！");
+        System.out.println("受影响的行数为：" + result);
+       /* QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(User::getUserName,"李四");
+        User user = userMapper.selectOne(queryWrapper);
+        System.out.println(user);*/
+
+    }
+
 
     @Test
     public void md5(){
@@ -151,7 +323,6 @@ public class StartAppTest {
         user.setUserDate(date);
         user.setUserLogic(0);
         userMapper.insert(user);
-
     }
     
     @Test
@@ -198,8 +369,8 @@ public class StartAppTest {
         String password = "1111";
         user.setUserName(userName);
         user.setPassword(password);
-        User userInsert = userService.UserInsert(user);
-        System.out.println("userInsert:"+userInsert);
+        //User userInsert = userService.UserInsert(user);
+        //System.out.println("userInsert:"+userInsert);
     }
 
     /**
@@ -285,7 +456,7 @@ public class StartAppTest {
         grow.setGrowTelephone("13856939334");
         grow.setWriteName("筱勇");
         grow.setReadName("猪心");
-        Grow insert = growService.GrowInsert(grow,1);
+        Grow insert = growService.GrowInsert(grow);
         System.out.println("result:"+insert);
     }
 
@@ -295,8 +466,8 @@ public class StartAppTest {
         past.setPastTheme("敬死去的自己");
         past.setPastContent("亲爱的过去的自己，我相信你会变得越来越好。请记住，无论你走到哪里，我都会一直支持你、关心你。加油！");
         past.setPastVideo(null);
-        Past insert = pastService.PastInsert(past, 1);
-        System.out.println("result:"+insert);
+        //Past insert = pastService.PastInsert(past, 1);
+       //System.out.println("result:"+insert);
     }
 
 

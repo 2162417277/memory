@@ -34,7 +34,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/admin/aliyun/ossoss")
 @CrossOrigin
-public class Oss2Controller {
+public class       Oss2Controller {
 
     @Autowired
     private OssService ossService;

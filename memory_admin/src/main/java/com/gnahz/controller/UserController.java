@@ -2,11 +2,14 @@ package com.gnahz.controller;
 
 
 import com.gnahz.api.CommonResult;
+import com.gnahz.api.ResultCode;
+import com.gnahz.common.RateLimiting;
 import com.gnahz.utils.JwtTokenUtil;
 import com.gnahz.mapper.UserMapper;
 import com.gnahz.pojo.User;
 import com.gnahz.service.UserService;
 import com.gnahz.vo.UserAndPsVo;
+import com.gnahz.vo.UserEnrollVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +22,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import java.util.HashMap;
-
-
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -59,7 +61,7 @@ public class UserController {
     @ApiOperation(value = "注册用户")
     @RequestMapping(value = "/public/user/insert",method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult<User> UserInsert(@Validated @RequestBody User user){
+    public CommonResult<User> UserInsert(@Validated @RequestBody UserEnrollVo user){
         User adminUser = userService.UserInsert(user);
         if (adminUser == null) {
             return CommonResult.loginhasfailed();
@@ -68,17 +70,19 @@ public class UserController {
     }
 
     /**
-     * 用户登录(待完善token JWT)
+     * 用户登录(已完善token JWT)
      * http://localhost:9999/admin/user/logOn?userName=李四&&password=1234567
 
      * @return
      * @PathParam("userName")String userName,
      *                                   @PathParam("password")String password
      */
+
     @ApiOperation("用户登录")
-    @RequestMapping(value = "/public/user/login",method = RequestMethod.GET)
+    @RateLimiting(key = "userLogin", permitsPerSecond = 1, timeout = 500, timeunit = TimeUnit.MILLISECONDS,msg = "登录太频繁，请稍后再试！")
+    @RequestMapping(value = "/public/user/login",method = RequestMethod.POST)
     public CommonResult UserLogin(@Valid @RequestBody UserAndPsVo userAndPsVo){
-        User logOn = userService.selectPasswordByName(userAndPsVo.getUserName(), userAndPsVo.getPassword());
+        User logOn = userService.selectPasswordByName(userAndPsVo.getUsername(), userAndPsVo.getPassword());
         //如果为空
         if(logOn == null){
             //说明用户名或密码错误，返回一个验证失败的结果，提示"用户名或密码错误"
@@ -93,7 +97,7 @@ public class UserController {
         tokenMap.put("tokenHeader",tokenHeader);
         //说明用户名和密码匹配成功，返回一个成功的结果，将tokenMap作为数据返回
         //返回一个成功的结果，并将tokenMap作为数据返回。这样，客户端就可以使用这个token来进行后续的操作了
-        return CommonResult.success(tokenMap);
+        return CommonResult.successLogin(tokenMap);
     }
 
 

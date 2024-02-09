@@ -7,3 +7,53 @@ spring:
     url: jdbc:mysql://${memory.mysql.ip}:${memory.mysql.port}/${memory.mysql.db}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: ${memory.mysql.username}
     password: ${memory.mysql.password}
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+    #Spring Boot 默认是不注入这些属性值的，需要自己绑定
+    #druid 数据源专有配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+
+  # redis配置
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    #我没有给redis设置账号和密码
+    #username: guest
+    #password: guest
+
+
+# 日志输出配置
+logging:
+  level:
+    root: info
+
+
+#jwt 自定义配置
+Jwt:
+  #jwt签名私钥
+  secretKey: sdsdsd23232323
+
+
+mail:
+  host: smtp.qq.com
+  email: 2162417277@qq.com
+  username: 2162417277@qq.com
+  password: gcfoamlcdqirecgj
+  port: 25
+  cron: 0 0/1 * * * ?
+
+
+
+

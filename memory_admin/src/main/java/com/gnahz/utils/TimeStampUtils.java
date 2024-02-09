@@ -2,6 +2,7 @@ package com.gnahz.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @Author 张伟洁
@@ -10,6 +11,11 @@ import java.text.SimpleDateFormat;
  */
 public class TimeStampUtils {
 
+    /**
+     * 转换为时间戳（以秒为单位）
+     * @param time
+     * @return
+     */
     public static Long TimeStamp(String time){
         Long beginUseTime = null;
         try {
@@ -22,6 +28,14 @@ public class TimeStampUtils {
             e.printStackTrace();
         }
         return beginUseTime;
+    }
+
+    public static String DateStamp(Long Stamp){
+        Date date = new Date(Stamp * 1000); // 将时间戳转换为Date对象
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm"); // 设置日期格式
+        String formattedDate = sdf.format(date); // 将Date对象转换为格式化的字符串
+        return formattedDate;
     }
 
 

@@ -54,6 +54,17 @@ public class CommonResult<T> {
         return new CommonResult<>(ResultCode.SUCCESS.getCode(),message,data);
     }
 
+
+    /**n
+     * 登录成功返回结果
+     * @param <T>
+     * @param data 获取的数据
+     * @return
+     */
+    public static <T> CommonResult<T> successLogin(T data){
+        return new CommonResult<>(ResultCode.LOGIN.getCode(),ResultCode.LOGIN.getMessage(),data);
+    }
+
     /**
      * 失败返回结果
      * @param errorCode 错误码

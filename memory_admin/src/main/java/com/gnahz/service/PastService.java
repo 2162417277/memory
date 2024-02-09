@@ -22,10 +22,9 @@ public interface PastService extends IService<Past> {
     /**
      * 给以前的自己一封信
      * @param past
-     * @param userId
      * @return
      */
-    Past PastInsert(Past past, Integer userId);
+    Past PastInsert(Past past);
 
     /**
      * 用户添加好的单表单信息修改（可修改信息为[主题pastTheme,内容pastContent,视频/图片pastVideo,]）

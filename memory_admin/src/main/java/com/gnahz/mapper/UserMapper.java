@@ -20,4 +20,11 @@ public interface UserMapper extends BaseMapper<User> {
      * @return
      */
     String selectPasswordByName(@Param("userName") String userName);
+
+    /**
+     * 根据用户名查询id
+     * @param userName
+     * @return
+     */
+    Integer findByUsername(@Param("userName") String userName);
 }

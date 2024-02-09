@@ -2,6 +2,9 @@ package com.gnahz.domin;
 
 import com.gnahz.pojo.User;
 import com.gnahz.service.UserService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,14 +17,14 @@ import java.util.Collection;
  * 用户信息
  * 用户是否启用
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MyUserDetails implements UserDetails {
 
     // 用户信息
     private User user;
 
-    public MyUserDetails(User user) {
-        this.user = user;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -40,17 +43,17 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     /**
@@ -60,9 +63,5 @@ public class MyUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return user.getUserLogic() == 0;
-    }
-
-    public User getUser() {
-        return user;
     }
 }

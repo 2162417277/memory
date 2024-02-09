@@ -2,9 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gnahz.mapper.GrowMapper">
 
+
+
+
     <select id="queryAllByPage" resultType="com.gnahz.pojo.Grow">
         /*SELECT * FROM `grow` WHERE grow_user_id = 1;*/
         select * from grow WHERE grow_user_id=#{id}
+    </select>
+    <select id="getCron" resultType="java.lang.String">
+        select cron from grow where grow_id = 3
+    </select>
+    <!--根据cron查询用户时间-->
+    <select id="OldTime" resultType="java.lang.String">
+        select grow_new_time from grow where cron = #{cron}
+    </select>
+    <select id="InsertDateAll" resultType="java.lang.String">
+        SELECT grow_new_time FROM grow ORDER BY grow_new_time ASC;
     </select>
 
     <!--主题,内容,视频\图片,创建时间,发送时间,邮件地址,手机号,写者姓名,发送者姓名-->

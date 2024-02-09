@@ -18,6 +18,11 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
+  jackson:
+    #格式化全局时间字段
+    date-format: yyyy-MM-dd HH:mm:ss
+    #指定时间区域类型
+    time-zone: GMT+8
 logging:
   level:
     root: info
@@ -71,3 +76,22 @@ redis:
     user: 'ums:member:'
     prefix:
       orderId: 'portal:orderId:'
+secure:
+  ignored:
+    urls: #安全路径白名单
+      -/admin/public/user/login
+      -admin/grow/queryGrow/**
+      -/js/**
+      -/css/**
+      -/img/**
+      -/**.html
+      -/swagger-ui.html
+      -/doc.html
+
+email:
+  smtp:
+    host: smtp.qq.com
+    email: 2162417277@qq.com
+    name: 邮件提醒系统
+    password: gcfoamlcdqirecgj
+    port: 25

@@ -10,9 +10,15 @@ import cn.hutool.core.date.DateUtil;
  */
 public class DateUtils {
 
+    /**
+     * 解析日期类型
+     * @param CharacterString
+     * @return
+     */
     public static DateTime StringTransformDate(String CharacterString){
         DateTime dateTime = DateUtil.parse(CharacterString);
         return dateTime;
     }
+
 
 }

@@ -3,6 +3,7 @@ package com.gnahz.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gnahz.api.CommonPage;
 import com.gnahz.api.CommonResult;
+import com.gnahz.common.RateLimiting;
 import com.gnahz.pojo.Past;
 import com.gnahz.pojo.User;
 import com.gnahz.service.PastService;
@@ -11,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author 张伟洁
@@ -42,14 +45,14 @@ public class PastController {
      * @return
      */
     @ApiOperation("给以前的自己一封信")
+    @RateLimiting(key = "PastInsert", permitsPerSecond = 1, timeout = 500, timeunit = TimeUnit.MILLISECONDS,msg = "使用太频繁，请稍后再试！")
+    // @RateLimiting(key = "PastInsert", permitsPerSecond = 2.0/500, timeout = 30000, timeunit = TimeUnit.MINUTES,msg = "使用太频繁，请四分钟后再试！")
     @RequestMapping(value = "/private/pastInset",method = RequestMethod.POST)
     public CommonResult<Past> PastInsert(@Validated @RequestBody Past past){
         //创建一个user对象
         User user = new User();
-        //获取user对象的id值
-        Integer userId = user.getUserId();
         //传入past对象和user的id值
-        Past insert = pastService.PastInsert(past, userId);
+        Past insert = pastService.PastInsert(past);
         //使用CommonResult.success(insert)方法将插入后的Past对象包装成一个成功的CommonResult对象，并将其作为方法的返回值
         return CommonResult.success(insert);
     }

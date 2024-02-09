@@ -5,4 +5,7 @@
     <select id="selectPasswordByName" resultType="java.lang.String">
         SELECT `password` FROM `user` WHERE user_name = #{userName};
     </select>
+    <select id="findByUsername" resultType="java.lang.Integer">
+        SELECT `user_id` FROM `user` WHERE user_name = #{userName};
+    </select>
 </mapper>

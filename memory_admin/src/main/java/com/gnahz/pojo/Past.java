@@ -47,4 +47,7 @@ public class Past implements Serializable {
     @TableField(value = "past_logic")
     @TableLogic
     private Integer pastLogic;
+
+    @TableField(value = "cron")
+    private String cron;
 }

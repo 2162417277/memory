@@ -3,6 +3,7 @@ package com.gnahz.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.gnahz.domin.MyUserDetails;
 import com.gnahz.pojo.User;
+import com.gnahz.vo.UserEnrollVo;
 
 import java.util.HashMap;
 
@@ -18,7 +19,7 @@ public interface UserService extends IService<User>{
      * @param user
      * @return
      */
-    User UserInsert(User user);
+    User UserInsert(UserEnrollVo user);
 
     /**
      * 用户登录

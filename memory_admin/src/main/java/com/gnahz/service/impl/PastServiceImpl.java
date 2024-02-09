@@ -5,15 +5,14 @@ import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.gnahz.config.MyThreadLocal.UserAndPsVoContext;
 import com.gnahz.mapper.PastMapper;
+import com.gnahz.mapper.UserMapper;
 import com.gnahz.pojo.Past;
 import com.gnahz.service.PastService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 /**
  * @Author 张伟洁
@@ -26,6 +25,9 @@ public class PastServiceImpl extends ServiceImpl<PastMapper, Past> implements Pa
 
     @Autowired
     PastMapper pastMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     /**
      * 查询所有回忆信（分页）
@@ -52,11 +54,10 @@ public class PastServiceImpl extends ServiceImpl<PastMapper, Past> implements Pa
     /**
      * 给以前的自己一封信
      * @param past
-     * @param userId
      * @return
      */
     @Override
-    public Past PastInsert(Past past, Integer userId) {
+    public Past PastInsert(Past past) {
         //创建一个新的Past对象
         Past NewPast = new Past();
         //将past对象的所有属性值复制到NewPast对象中
@@ -66,6 +67,8 @@ public class PastServiceImpl extends ServiceImpl<PastMapper, Past> implements Pa
         //将当前时间设置到PastOldTime中
         NewPast.setPastOldTime(date);
         //将变量id的值设置为NewPast对象的PastUserId属性
+        String username = UserAndPsVoContext.get();
+        Integer userId = userMapper.findByUsername(username);
         NewPast.setPastUserId(userId);
         //初始化为0 表示未删除
         NewPast.setPastLogic(0);

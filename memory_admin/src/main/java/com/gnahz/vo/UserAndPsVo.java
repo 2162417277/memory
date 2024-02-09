@@ -16,8 +16,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserAndPsVo {
+
+
     @ApiModelProperty(value = "用户名")
-    private String userName;
+    private String username;
     @ApiModelProperty("密码")
     private String password;
 

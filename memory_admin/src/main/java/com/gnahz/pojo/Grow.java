@@ -1,6 +1,7 @@
 package com.gnahz.pojo;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -39,6 +40,7 @@ public class Grow implements Serializable {
     @TableField(value = "grow_old_time")
     private Date growOldTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @ApiModelProperty(value = "发送（未来接收）时间")
     @TableField(value = "grow_new_time")
     private Date growNewTime;

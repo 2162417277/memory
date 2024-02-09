@@ -1,6 +1,7 @@
 package com.gnahz.config.component;
 
 import cn.hutool.core.util.StrUtil;
+import com.gnahz.config.MyThreadLocal.UserAndPsVoContext;
 import com.gnahz.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author 张伟洁
@@ -38,6 +40,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
 
+
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
@@ -49,6 +53,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // 解密
             jwt=jwt.substring(tokenHead.length());
             String userName = jwtTokenUtil.getUserNameFromToken(jwt);
+            UserAndPsVoContext.set(userName);
 
             if(!StrUtil.isBlank(userName)){
 
@@ -65,5 +70,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request,response);
+    }
+
+    public void afterCompletion(HttpServletRequest request,HttpServletResponse response){
+        UserAndPsVoContext.remove();
     }
 }

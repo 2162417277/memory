@@ -1,2 +1,14 @@
 server:
-  port: 9998
+  port: 8099
+
+secure:
+  ignored:
+    urls: #安全路径白名单
+      -/admin/public/user/login
+      -admin/grow/queryGrow/**
+      -/js/**
+      -/css/**
+      -/img/**
+      -/**.html
+      -/swagger-ui.html
+      -/doc.html

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gnahz.pojo.Grow;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * Date:2024-01-04-18:37
  * @create 忆项目(小白)
  */
+@Service("personMapper")
 @Mapper
 public interface GrowMapper extends BaseMapper<Grow> {
      List<Grow> queryAllByPage(@Param("id")Integer id);
@@ -40,4 +42,19 @@ public interface GrowMapper extends BaseMapper<Grow> {
                     @Param("growTelephone") String growTelephone,//手机号,
                     @Param("writeName") String writeName,//写者姓名,
                     @Param("readName") String readName);//发送者姓名
+
+
+
+    String OldTime(@Param("cron")String cron);
+
+    /**
+     * 查询所有的日期
+     * @return
+     */
+    List<String> InsertDateAll();
+
+
+
+    String getCron();
+
 }
