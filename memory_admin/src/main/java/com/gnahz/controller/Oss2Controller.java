@@ -1,3 +1,4 @@
+/*
 package com.gnahz.controller;
 
 import cn.hutool.json.JSONObject;
@@ -10,6 +11,8 @@ import com.gnahz.pojo.dto.OssCallbackResult;
 import com.gnahz.pojo.dto.OssPolicyResult;
 import com.gnahz.service.OssService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,23 +27,26 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+*/
 /**
  * TODO Oss相关操作接口
  *
  * @author ss_419
  * @version 1.0
  * @date 2023/5/28 20:43
- */
+ *//*
+
 @RestController
 @RequestMapping("/admin/aliyun/ossoss")
 @CrossOrigin
-public class       Oss2Controller {
+@Api(tags = "oss阿里云1",hidden = true)
+public class Oss2Controller {
 
     @Autowired
     private OssService ossService;
 
     @CrossOrigin
-    @RequestMapping("/policys")
+    @RequestMapping(value = "/policys",method = RequestMethod.GET)
     public Map<String,String> policysMap(){
         // 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。
         String accessId = "1279183516482243";
@@ -103,10 +109,12 @@ public class       Oss2Controller {
         }
         return null;
     }
-    /**
+    */
+/**
      * oss上传签名生成
      * @return
-     */
+     *//*
+
     @CrossOrigin
     @RequestMapping("/policy")
     public OssPolicyResult policy(){
@@ -115,10 +123,12 @@ public class       Oss2Controller {
         return result;
     }
 
-    /**
+    */
+/**
      * oss上传成功回调
      * @return
-     */
+     *//*
+
     @RequestMapping("/callback")
     public OssCallbackResult callback(HttpServletRequest request){
         OssCallbackResult callback = ossService.callback(request);
@@ -129,3 +139,4 @@ public class       Oss2Controller {
 
 }
 
+*/

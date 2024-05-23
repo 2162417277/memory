@@ -15,7 +15,7 @@ import java.util.Date;
  * @create 忆项目(小白)
  */
 public class QQJobBean extends QuartzJobBean {
-//obs
+
     @Autowired
     private QQEmailServiceImpl qqEmailService;
 

@@ -21,8 +21,6 @@ public class UserCacheServiceImpl implements UserCacheService {
     private UserService userService;
     @Autowired
     private RedisService redisService;
-    @Autowired
-    private UserMapper userMapper;
     @Value("${redis.database}")
     private String REDIS_DATABASE;
     @Value("${redis.expire.common}")

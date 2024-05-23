@@ -22,6 +22,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
+    @Autowired
+    private SecureIgnoreUrlsConfig secureIgnoreUrlsConfig;
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -38,16 +41,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //白名单进行放行
         AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry = http.authorizeHttpRequests();
         //循环白名单进行放行
-//        for (String url : secureIgnoreUrlsConfig().getUrls()) {
-//            registry.antMatchers(url).permitAll();
-//        }HttpMethod.OPTIONS
+        for (String url : secureIgnoreUrlsConfig.getUrls()) {
+            registry.antMatchers(url).permitAll();
+        }
         /**
          * "/admin/public/user/login","/admin/grow/queryGrow/**","/js/**","/css/**","/img/**","/**.html","/swagger-ui.html","/doc.html"
          */
         //允许跨域请求OPTIONS CORS
-        registry.antMatchers("/admin/public/user/login","/sendCommonEmail","/admin/public/user/insert","/admin/grow/queryGrow/**","/js/**","/css/**","/img/**","/**.html","/swagger-ui.html","/doc.html").permitAll();
+        //registry.antMatchers("/admin/public/user/login","/sendCommonEmail","/admin/public/user/insert","/admin/grow/queryGrow/**","/js/**","/css/**","/img/**","/**.html","/swagger-ui.html/**","/doc.html","/swagger-resources","/webjars/**","/v2/api-docs","/test/test/test").permitAll();
         //其他任何请求都需要身份认证
         registry
+
                 //任何请求都需要认证
                 .anyRequest()
                 //都需要认证
@@ -72,10 +76,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Bean
-    public SecureIgnoreUrlsConfig secureIgnoreUrlsConfig(){
-        return new SecureIgnoreUrlsConfig();
-    }
 
     @Bean
     public ResltFulAccesDeniedHandler resltFulAccesDeniedHandler(){

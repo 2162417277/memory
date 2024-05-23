@@ -4,12 +4,15 @@ package com.gnahz.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gnahz.api.CommonPage;
 import com.gnahz.api.CommonResult;
+import com.gnahz.api.ResultCode;
 import com.gnahz.common.RateLimiting;
+import com.gnahz.email.service.impl.NetEaseServiceImpl;
 import com.gnahz.pojo.Grow;
-import com.gnahz.pojo.User;
 import com.gnahz.service.GrowService;
+import com.gnahz.vo.req.GrowReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +40,7 @@ public class GrowController {
      * @param pageSize
      * @return
      */
-    @ApiOperation("查询用户写给未来的信(所有)")
+    @ApiOperation(value = "查询用户写给未来的信(所有)",hidden = true)
     @RequestMapping(value = "/queryGrow/{id}",method = RequestMethod.GET)
     public CommonResult<CommonPage> queryGrow(@PathVariable Integer id,
                                     @RequestParam(value = "pageName",defaultValue = "1")Integer pageName,
@@ -55,18 +58,21 @@ public class GrowController {
      * 这段代码中的@Validated注解表示对传入的Grow对象进行验证，确保其符合预期的数据格式和约束条件。
      * 而@RequestBody注解表示将请求体中的数据绑定到方法参数上
      * 限流时间大概4分钟，使用令牌桶算法
-     * @param grow
+     * @param growReq
      * @return
      */
     @ApiOperation("写给未来的信")
     @RateLimiting(key = "growInsert", permitsPerSecond = 1, timeout = 500, timeunit = TimeUnit.MILLISECONDS,msg = "使用太频繁，请稍后再试！")
     //@RateLimiting(key = "growInsert", permitsPerSecond = 2.0/500, timeout = 30000, timeunit = TimeUnit.MINUTES,msg = "使用太频繁，请四分钟后再试！")
     @RequestMapping(value = "/growInsert",method = RequestMethod.POST)
-    public CommonResult<Grow> growInsert(@Validated @RequestBody Grow grow){
+    public CommonResult<Grow> growInsert(@Validated @RequestBody GrowReq growReq){
         //调用growService.GrowInsert(grow, userId)方法将传入的Grow对象和当前用户的ID一起插入到数据库中。该方法会返回插入后的Grow对象，将其存储在变量insert中
-        Grow insert = growService.GrowInsert(grow);
+        Boolean insert = growService.GrowInsert(growReq);
+        if(insert == null){
+            return CommonResult.failedTime();
+        }
         //使用CommonResult.success(insert)方法将插入后的Grow对象包装成一个成功的CommonResult对象，并将其作为方法的返回值
-        return CommonResult.success(insert);
+        return CommonResult.success();
     }
 
     /**
@@ -76,10 +82,10 @@ public class GrowController {
      */
     @ApiOperation("修改操作")
     @RequestMapping(value = "/growUpdate",method = RequestMethod.POST)
-    public CommonResult<Grow> growUpdate(@Validated @RequestBody Grow grow){
+    public CommonResult<Void> growUpdate(@Validated @RequestBody Grow grow){
         //前端传入一个表单只要不为空或null那么字段就进行修改
-        Grow growUpdate = growService.growUpdate(grow);
-        return CommonResult.success(growUpdate);
+       growService.growUpdate(grow);
+        return CommonResult.success();
     }
 
 }

@@ -42,7 +42,6 @@ public class CommonPage <T>{
         return result;
     }
 
-
     /**
      * get set 方法
      * @return

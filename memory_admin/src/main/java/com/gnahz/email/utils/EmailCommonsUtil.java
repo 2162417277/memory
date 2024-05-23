@@ -37,7 +37,7 @@ public class EmailCommonsUtil {
      * @param bccMail 秘密抄送人邮箱
      * @param fileList 附件
      */
-    public void sendEmail(String subject, String content,boolean contentIsHtml,
+    public void sendFileEmail(String subject, String content,boolean contentIsHtml,
                           String[] toMail, String[] ccMail, String[] bccMail, File[] fileList)
             throws EmailException, UnsupportedEncodingException {
         HtmlEmail email = new HtmlEmail();
@@ -75,6 +75,54 @@ public class EmailCommonsUtil {
                 emailAttachment.setPath(file.getPath());
                 email.attach(emailAttachment);
             }
+        }
+        // 发送邮件
+        email.send();
+        logger.info("邮件发送完成");
+    }
+
+
+    /**
+     *
+     * @param subject
+     * @param content
+     * @param contentIsHtml
+     * @param toMail
+     * @param ccMail
+     * @param bccMail
+     * @throws EmailException
+     * @throws UnsupportedEncodingException
+     * 没有附件
+     */
+    public void sendEmail(String subject, String content,boolean contentIsHtml,
+                          String toMail, String ccMail, String bccMail)
+            throws EmailException, UnsupportedEncodingException {
+        HtmlEmail email = new HtmlEmail();
+        // smtp服务地址
+        email.setHostName(emailProperties.getHost());
+        // 邮件验证
+        email.setAuthentication(emailProperties.getEmail(),emailProperties.getPassword());
+        // smtp端口
+        email.setSmtpPort(emailProperties.getPort());
+        email.setCharset("utf-8");
+        // 发件人邮箱地址及昵称
+        email.setFrom(emailProperties.getEmail(),emailProperties.getName());
+        // 收件人邮箱
+        email.addTo(toMail);
+        if(!ObjectUtils.isEmpty(ccMail)){
+            // 抄送人邮箱
+            email.addCc(ccMail);
+        }
+        if(!ObjectUtils.isEmpty(bccMail)){
+            // 秘密抄送人邮箱
+            email.addBcc(bccMail);
+        }
+        // 主题
+        email.setSubject(subject);
+        if(contentIsHtml){
+            email.setHtmlMsg(content);
+        }else{
+            email.setMsg(content);
         }
         // 发送邮件
         email.send();

@@ -2,14 +2,13 @@ package com.gnahz.controller;
 
 
 import com.gnahz.api.CommonResult;
-import com.gnahz.api.ResultCode;
 import com.gnahz.common.RateLimiting;
 import com.gnahz.utils.JwtTokenUtil;
 import com.gnahz.mapper.UserMapper;
 import com.gnahz.pojo.User;
 import com.gnahz.service.UserService;
-import com.gnahz.vo.UserAndPsVo;
-import com.gnahz.vo.UserEnrollVo;
+import com.gnahz.vo.req.UserAndPwdReq;
+import com.gnahz.vo.req.UserEnrollReq;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -32,7 +30,7 @@ import java.util.concurrent.TimeUnit;
  */
 @RestController
 @RequestMapping("/admin")
-@Api(tags = "查询所有用户")
+@Api(tags = "用户信息")
 public class UserController {
 
     @Autowired
@@ -46,9 +44,9 @@ public class UserController {
 
     @Autowired
     UserMapper userMapper;
-
     @Autowired
     UserService userService;
+
 
     /**
      * 注册用户信息
@@ -58,15 +56,15 @@ public class UserController {
      * }
      * @return
      */
-    @ApiOperation(value = "注册用户")
+    @ApiOperation("注册用户")
     @RequestMapping(value = "/public/user/insert",method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult<User> UserInsert(@Validated @RequestBody UserEnrollVo user){
-        User adminUser = userService.UserInsert(user);
-        if (adminUser == null) {
+    public CommonResult<User> UserInsert(@Validated @RequestBody UserEnrollReq user){
+        Boolean userInsert = userService.UserInsert(user);
+        if (userInsert == null) {
             return CommonResult.loginhasfailed();
         }
-        return CommonResult.success(adminUser);
+        return CommonResult.success();
     }
 
     /**
@@ -81,16 +79,11 @@ public class UserController {
     @ApiOperation("用户登录")
     @RateLimiting(key = "userLogin", permitsPerSecond = 1, timeout = 500, timeunit = TimeUnit.MILLISECONDS,msg = "登录太频繁，请稍后再试！")
     @RequestMapping(value = "/public/user/login",method = RequestMethod.POST)
-    public CommonResult UserLogin(@Valid @RequestBody UserAndPsVo userAndPsVo){
-        User logOn = userService.selectPasswordByName(userAndPsVo.getUsername(), userAndPsVo.getPassword());
-        //如果为空
-        if(logOn == null){
-            //说明用户名或密码错误，返回一个验证失败的结果，提示"用户名或密码错误"
-            return CommonResult.validateFailed("用户名或密码错误");
-        }
+    public CommonResult UserLogin(@Valid @RequestBody UserAndPwdReq userAndPwdReq){
+       userService.selectPasswordByName(userAndPwdReq.getUsername(), userAndPwdReq.getPassword());
         //jwtTokenUtil.generateUserNameStr(logOn.get(userName))方法来生成token。
         // 然后，将生成的token以及其他相关信息存储在一个名为tokenMap的HashMap中
-        String token = jwtTokenUtil.generateUserNameStr(logOn.getUserName());
+        String token = jwtTokenUtil.generateUserNameStr(userAndPwdReq.getUsername());
         HashMap<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token",token);
         tokenMap.put("tokenHead",tokenHead);
@@ -102,12 +95,13 @@ public class UserController {
 
 
 
+
     /**
      * 根据id返回用户信息
      * @param id
      * @return
      */
-    @ApiOperation(value = "根据用户id返回数据")
+    @ApiOperation("根据用户id返回数据")
     @RequestMapping(value = "/user/{id}",method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<User> userId(@PathVariable Integer id){

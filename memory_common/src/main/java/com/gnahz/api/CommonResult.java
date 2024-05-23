@@ -33,6 +33,15 @@ public class CommonResult<T> {
         this.data = data;
     }
 
+    protected CommonResult(long code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public static <T> CommonResult<T> success(){
+        return new CommonResult<T>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage());
+    }
+
     /**
      * 成功返回结果
      * @param data 获取的数据
@@ -52,6 +61,9 @@ public class CommonResult<T> {
      */
     public static <T> CommonResult<T> success(T data,String message){
         return new CommonResult<>(ResultCode.SUCCESS.getCode(),message,data);
+    }
+    public static <T> CommonResult<T> success(long code,T data,String message){
+        return new CommonResult<>(code,message,data);
     }
 
 
@@ -106,6 +118,15 @@ public class CommonResult<T> {
     }
 
     /**
+     * 失败返回结果(时间错误)
+     * @param <T>
+     * @return
+     */
+    public static <T> CommonResult<T> failedTime(){
+        return failed(ResultCode.TIMEMU);
+    }
+
+    /**
      * 参数验证失败返回结果
      * @param <T>
      * @return
@@ -152,7 +173,6 @@ public class CommonResult<T> {
     public static <T> CommonResult<T> loginhasfailed() {
         return new CommonResult<T>(ResultCode.LOGINHASFAILED.getCode(),ResultCode.LOGINHASFAILED.getMessage(), null);
     }
-
 
 
 

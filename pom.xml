@@ -6,8 +6,8 @@
     <modules>
         <module>memory_admin</module>
         <module>memory_security</module>
-        <module>test</module>
         <module>memory_common</module>
+        <module>memory_ai</module>
     </modules>
 
     <parent>
@@ -34,6 +34,8 @@
         <velocity.version>2.2</velocity.version>
         <hutool.version>4.5.7</hutool.version>
         <redisson.version>3.17.1</redisson.version>
+        <springfox-swagger.version>3.0.0</springfox-swagger.version>
+        <swagger-models.version>1.6.0</swagger-models.version>
     </properties>
 
     <dependencies>
@@ -58,6 +60,21 @@
    -->
     <dependencyManagement>
        <dependencies>
+           <dependency>
+               <groupId>com.gnahz</groupId>
+               <artifactId>memory_security</artifactId>
+               <version>0.0.1-SNAPSHOT</version>
+           </dependency>
+           <dependency>
+               <groupId>com.gnahz</groupId>
+               <artifactId>memory_common</artifactId>
+               <version>0.0.1-SNAPSHOT</version>
+           </dependency>
+           <dependency>
+               <groupId>com.gnahz</groupId>
+               <artifactId>memory_ai</artifactId>
+               <version>0.0.1-SNAPSHOT</version>
+           </dependency>
            <!--lombok依赖-->
            <dependency>
                <groupId>org.projectlombok</groupId>
@@ -102,7 +119,7 @@
                <version>${swagger2.version}</version>
            </dependency>
            <!--解决Swagger 2.9.2版本NumberFormatException-->
-           <dependency>
+         <!--  <dependency>
                <groupId>io.swagger</groupId>
                <artifactId>swagger-models</artifactId>
                <version>${swagger-models.version}</version>
@@ -111,7 +128,7 @@
                <groupId>io.swagger</groupId>
                <artifactId>swagger-annotations</artifactId>
                <version>${swagger-annotations.version}</version>
-           </dependency>
+           </dependency>-->
            <!--Velocity模板引擎-->
            <dependency>
                <groupId>org.apache.velocity</groupId>
@@ -134,4 +151,5 @@
            </dependency>
        </dependencies>
     </dependencyManagement>
+
 </project>

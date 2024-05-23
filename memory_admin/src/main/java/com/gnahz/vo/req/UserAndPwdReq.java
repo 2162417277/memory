@@ -1,0 +1,26 @@
+package com.gnahz.vo.req;
+
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * @Author 张伟洁
+ * Date:2024-01-21-22:42
+ * @create 忆项目(小白)
+ */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserAndPwdReq {
+
+
+    @ApiModelProperty(value = "用户名")
+    private String username;
+    @ApiModelProperty("密码")
+    private String password;
+
+}

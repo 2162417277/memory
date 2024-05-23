@@ -14,13 +14,40 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <!--打包跳过测试-->
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.briqt</groupId>
+            <artifactId>xunfei-spark4j</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.78</version>
+        </dependency>
+        <dependency>
             <groupId>com.gnahz</groupId>
             <artifactId>memory_security</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gnahz</groupId>
+            <artifactId>memory_ai</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gnahz</groupId>
+            <artifactId>memory_common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -46,21 +73,34 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
         <!--swagger接口文档依赖-->
-       <!-- <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>-->
-        <!--swagger ui-->
-        <!--<dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>-->
+        <!-- Knife4j在线API文档的依赖 -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
-            <!--使用Swagger2-->
             <artifactId>knife4j-spring-boot-starter</artifactId>
-            <version>2.0.9</version>
+            <version>3.0.2</version>
         </dependency>
+      <!--  <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>3.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.swagger</groupId>
+                    <artifactId>swagger-models</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>3.0.0</version>
+        </dependency>-->
+
 
         <!--Hutool Java工具包-->
         <dependency>
@@ -80,12 +120,6 @@
             <version>0.9.0</version>
         </dependency>
         <dependency>
-            <groupId>com.gnahz</groupId>
-            <artifactId>memory_common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
             <version>3.17.1</version>
@@ -96,6 +130,10 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>
             <version>1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
         <!--        @ConfigurationProperties依赖 -->
@@ -134,9 +172,52 @@
             <artifactId>velocity-engine-core</artifactId>
             <version>2.0</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>3.0.0</version>
+        </dependency>
 
     </dependencies>
+
+
+    <build>
+        <!--设置对应生成的xml文件路径??-->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <!--设置自己目录下的配置文件-->
+            <resource>
+                <!--下方resources的文件夹名字要和自己项目的文件夹名确认一致才行 很多人就是忽略了名字不一致 -->
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.gnahz.StartApp</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

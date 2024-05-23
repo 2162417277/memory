@@ -1,6 +1,7 @@
 package com.gnahz.config;
 
 
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.google.common.base.Predicates;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.CorsEndpointProperties;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties;
@@ -23,6 +24,7 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,7 +42,9 @@ import java.util.Objects;
  */
 @Configuration
 @EnableSwagger2
+@EnableKnife4j
 public class Swagger2Config {
+    private static final String splitor = ";";
 
     /**
      * 创建API应用
@@ -54,22 +58,26 @@ public class Swagger2Config {
         /*指定文档类型为Swagger 2.0*/
         return new Docket(DocumentationType.SWAGGER_2)
                 //配置网站的基本信息
-                .apiInfo(new ApiInfoBuilder()
-                        //网站标题
-                        .title("忆系统---api文档")
-                        //标题后面的版本号
-                        .version("v1.0")
-                        .description("忆系统接口描述")
-                        //联系人信息
-                        .contact(new Contact("张伟洁","https://dhc.pythonanywhere.com/","2162417277@qq.com"))
-                        .build())
+                .apiInfo(apiInfo())
                 .select()
                 //指定接口位置
                 .apis(RequestHandlerSelectors
-                        .withClassAnnotation(RestController.class)
-                )
+                        .withClassAnnotation(RestController.class))
+                //.apis(RequestHandlerSelectors.basePackage("com.gnahz.ai.controller"))
                 /*选择了所有以"/gnahz/"开头的路径*/
                 .paths(PathSelectors.any())
+                .build();
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                //网站标题
+                .title("忆系统---api文档")
+                //标题后面的版本号
+                .version("v1.0")
+                .description("忆系统接口描述")
+                //联系人信息
+                .contact(new Contact("张伟洁", "https://dhc.pythonanywhere.com/", "2162417277@qq.com"))
                 .build();
     }
 
@@ -89,8 +97,9 @@ public class Swagger2Config {
         boolean shouldRegisterLinksMapping = this.shouldRegisterLinksMapping(webEndpointProperties, environment, basePath);
         return new WebMvcEndpointHandlerMapping(endpointMapping, webEndpoints, endpointMediaTypes, corsProperties.toCorsConfiguration(), new EndpointLinksResolver(allEndpoints, basePath), shouldRegisterLinksMapping, null);
     }
-
     private boolean shouldRegisterLinksMapping(WebEndpointProperties webEndpointProperties, Environment environment, String basePath) {
-        return webEndpointProperties.getDiscovery().isEnabled() && (StringUtils.hasText(basePath) || Objects.equals(ManagementPortType.get(environment), ManagementPortType.DIFFERENT));
+        return webEndpointProperties.getDiscovery().isEnabled() && (StringUtils.hasText(basePath) || ManagementPortType.get(environment).equals(ManagementPortType.DIFFERENT));
     }
+
+
 }

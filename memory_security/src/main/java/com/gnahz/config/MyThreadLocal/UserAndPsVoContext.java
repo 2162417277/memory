@@ -11,14 +11,25 @@ public class UserAndPsVoContext {
     //从token里面获取用户名
     private static ThreadLocal<String> threadLocal = new ThreadLocal<>();
 
+    /**
+     * 添加
+     * @param username
+     */
     public static void set(String username) {
         threadLocal.set(username);
     }
 
+    /**
+     * 获取
+     * @return
+     */
     public static String get() {
         return threadLocal.get();
     }
 
+    /**
+     * 删除
+     */
     public static void remove(){
         threadLocal.remove();
     }

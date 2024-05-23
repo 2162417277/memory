@@ -11,7 +11,7 @@ public interface IErrorCode {
      * 获取错误编号code
      * @return
      */
-    long getCode();
+    Integer getCode();
 
     /**
      * 获取错误信息

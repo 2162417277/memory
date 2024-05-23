@@ -21,15 +21,16 @@ public class JobConfig {
                 .storeDurably()
                 .build();
     }
-
     @Bean
     public Trigger springQQJobTrigger(){
         return TriggerBuilder.newTrigger()
                 .forJob("springQQJobDetail")
-                //.startNow()
+                //.startNow()0 * * * * ? *
                 .withSchedule(CronScheduleBuilder.cronSchedule("0 * * * * ? *")) //不能写过期的时间(每分钟执行一次)
                 .build();
     }
+
+
 
 
 
@@ -40,13 +41,31 @@ public class JobConfig {
                 .storeDurably()
                 .build();
     }
-
     @Bean
     public Trigger springMysqlJobTrigger(){
         return TriggerBuilder.newTrigger()
                 .forJob("springMysqlJobDetail")
-                //.startNow()    0 0 0 1 1/2 ?   40 15 8 * * ? *
-                .withSchedule(CronScheduleBuilder.cronSchedule("40 20 22 * * ? *")) //不能写过期的时间(每两个月执行一次)
+                //.startNow()    0 0 0 1 1/1 ?   40 15 8 * * ? *
+                .withSchedule(CronScheduleBuilder.cronSchedule("3 0 0 1 1/1 ?")) //不能写过期的时间(每一个月执行一次)
+                .build();
+    }
+
+
+
+
+
+    @Bean
+    public JobDetail springStartOnceMysqlJobDetail(){
+        return JobBuilder.newJob(MySqlJobBean.class)
+                .withIdentity("springStartOnceMysqlJobDetail")
+                .storeDurably()
+                .build();
+    }
+    @Bean
+    public Trigger springStartOnceMysqlJobTrigger(){
+        return TriggerBuilder.newTrigger()
+                .forJob("springStartOnceMysqlJobDetail")
+                .startNow() // 立即触发
                 .build();
     }
 }

@@ -7,5 +7,19 @@ package com.gnahz.email.service;
  */
 public interface QQEmailService {
 
+    /**
+     * 可上传邮件带html样式的还有图片
+     */
+    void sendCommonEmail(String subjects,String htmlS,String mail);
+
+    /**
+     * 邮箱是html形式
+     */
+    void sendCommonEmaill(String format1);
+
+    /**
+     * 测试方法
+     */
+    boolean EmailTest();
 
 }

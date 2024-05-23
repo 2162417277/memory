@@ -30,6 +30,25 @@ public class TimeStampUtils {
         return beginUseTime;
     }
 
+
+    /**
+     * 转换为时间戳
+     * @param minute
+     * @return
+     */
+    public static Long TimeMinuteStamp(String minute){
+        Long beginUseTime = null;
+        try {
+            //  String bookBeginusetime = "20160-03-17 15:55";
+            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
+            beginUseTime = sdf.parse(minute).getTime()/1000;
+            //Long beginUseTime1 = sdf.parse(bookBeginusetime).getTime();
+            //Long beginUseTime2 = sdf.parse(bookBeginusetime).getTime()/1000;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return beginUseTime;
+    }
     public static String DateStamp(Long Stamp){
         Date date = new Date(Stamp * 1000); // 将时间戳转换为Date对象
 

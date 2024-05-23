@@ -2,17 +2,26 @@ package com.gnahz.service.impl;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.gnahz.api.CommonPage;
 import com.gnahz.config.MyThreadLocal.UserAndPsVoContext;
+import com.gnahz.dao.PastDao;
+import com.gnahz.dao.UserDao;
 import com.gnahz.mapper.PastMapper;
 import com.gnahz.mapper.UserMapper;
 import com.gnahz.pojo.Past;
 import com.gnahz.service.PastService;
+import com.gnahz.vo.req.PastReq;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author 张伟洁
@@ -20,14 +29,13 @@ import org.springframework.stereotype.Service;
  * @create 忆项目(小白)
  */
 @Service
-public class PastServiceImpl extends ServiceImpl<PastMapper, Past> implements PastService {
+public class PastServiceImpl implements PastService {
 
 
     @Autowired
-    PastMapper pastMapper;
-
+    private PastDao pastDao;
     @Autowired
-    UserMapper userMapper;
+    private UserDao userDao;
 
     /**
      * 查询所有回忆信（分页）
@@ -41,41 +49,25 @@ public class PastServiceImpl extends ServiceImpl<PastMapper, Past> implements Pa
         //创建一个Page对象，使用传入的pageName和pageSize作为参数进行初始化
         Page page = new Page<>(pageName,pageSize);
         //使用queryWrapper.lambda()方法来构建查询条件
-        QueryWrapper<Past> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda()
-                //.eq(Grow::getGrowUserId, id)表示查询条件为Grow表中的growUserId字段等于传入的id
-                .eq(Past::getPastUserId,id)
-                //升序排序
-                .orderByAsc(Past::getPastOldTime);
+        Wrapper<Past> pasts = pastDao.queryPast(id);
         //调用this.page(page, queryWrapper)方法，将page和queryWrapper作为参数传入，执行查询操作并返回分页结果
-        return this.page(page,queryWrapper);
+        return pastDao.page(page,pasts);
     }
 
     /**
      * 给以前的自己一封信
-     * @param past
+     * @param pastReq
      * @return
      */
+    @Transactional
     @Override
-    public Past PastInsert(Past past) {
-        //创建一个新的Past对象
-        Past NewPast = new Past();
-        //将past对象的所有属性值复制到NewPast对象中
-        BeanUtils.copyProperties(past,NewPast);
+    public void PastInsert(PastReq pastReq) {
         //获取当前时间
         DateTime date = DateUtil.date();
-        //将当前时间设置到PastOldTime中
-        NewPast.setPastOldTime(date);
         //将变量id的值设置为NewPast对象的PastUserId属性
         String username = UserAndPsVoContext.get();
-        Integer userId = userMapper.findByUsername(username);
-        NewPast.setPastUserId(userId);
-        //初始化为0 表示未删除
-        NewPast.setPastLogic(0);
-        //添加到数据库
-        pastMapper.insert(NewPast);
-        //返回NewPast实体类
-        return NewPast;
+        Integer userId = userDao.findByUsername(username);
+        pastDao.PastInsert(pastReq,date,userId);
     }
 
     /**
@@ -85,16 +77,10 @@ public class PastServiceImpl extends ServiceImpl<PastMapper, Past> implements Pa
      * @return
      */
     @Override
-    public Past pastUpdate(Past past) {
+    public void pastUpdate(Past past) {
         //获取当前系统的时间
         DateTime date = DateUtil.date();
         //添加到setPastOldTime为表单创建时间
-        past.setPastOldTime(date);
-        pastMapper.PastUpdate(past.getPastUserId(),//表单id
-                            past.getPastTheme(),//表单主题
-                            past.getPastContent(),//表单内容
-                            past.getPastVideo(),//表单视频或图片
-                            past.getPastOldTime());//表单日期
-        return past;
+        pastDao.pastUpdate(past,date);
     }
 }

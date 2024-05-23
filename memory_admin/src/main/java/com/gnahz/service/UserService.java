@@ -3,9 +3,7 @@ package com.gnahz.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.gnahz.domin.MyUserDetails;
 import com.gnahz.pojo.User;
-import com.gnahz.vo.UserEnrollVo;
-
-import java.util.HashMap;
+import com.gnahz.vo.req.UserEnrollReq;
 
 /**
  * @Author 张伟洁
@@ -19,7 +17,7 @@ public interface UserService extends IService<User>{
      * @param user
      * @return
      */
-    User UserInsert(UserEnrollVo user);
+    Boolean UserInsert(UserEnrollReq user);
 
     /**
      * 用户登录
@@ -27,7 +25,7 @@ public interface UserService extends IService<User>{
      * @param password
      * @return
      */
-    User selectPasswordByName(String userName, String password);
+    void selectPasswordByName(String userName, String password);
 
 
     User getAdminByUsername(String username);
@@ -38,4 +36,5 @@ public interface UserService extends IService<User>{
      * @return
      */
     MyUserDetails loadUserByUsername(String username);
+
 }

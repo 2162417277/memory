@@ -3,11 +3,16 @@ package com.gnahz;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.crypto.digest.BCrypt;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.gnahz.ai.dao.ChatGpt;
 import com.gnahz.api.CommonPage;
 import com.gnahz.api.CommonResult;
+import com.gnahz.dao.GrowDao;
+import com.gnahz.dao.PastDao;
+import com.gnahz.email.service.impl.NetEaseServiceImpl;
 import com.gnahz.email.service.impl.QQEmailServiceImpl;
 import com.gnahz.mapper.GrowMapper;
 import com.gnahz.mapper.PastMapper;
@@ -16,25 +21,21 @@ import com.gnahz.pojo.Grow;
 import com.gnahz.pojo.Past;
 import com.gnahz.pojo.User;
 import com.gnahz.pojo.dto.OssPolicyResult;
-import com.gnahz.service.GrowService;
-import com.gnahz.service.OssService;
-import com.gnahz.service.PastService;
-import com.gnahz.service.UserService;
-import com.gnahz.service.impl.GrowServiceImpl;
-import com.gnahz.service.impl.OssServiceImpl;
-import com.gnahz.service.impl.RedisServiceImpl;
-import com.gnahz.service.impl.UserCacheServiceImpl;
+import com.gnahz.service.*;
+import com.gnahz.service.impl.*;
 import com.gnahz.utils.DateUtils;
 import com.gnahz.utils.JwtTokenUtil;
 import com.gnahz.utils.TimeStampUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.YearMonth;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,36 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest(classes = {StartApp.class})//测试方法
 @Slf4j//日志
 public class StartAppTest {
+
+
+    @Autowired
+    private GrowDao growDao;
+
+    @Test
+    void test20(){
+
+    }
+
+    @Autowired
+    private RedisService redisService;
+
+    @Test
+    void redisTest(){
+        ArrayList<String> times = (ArrayList<String>) redisService.get("Time");
+        for (String time: times) {
+            System.out.println(time);
+        }
+    }
+
+    @Autowired
+    private ChatGpt chatGpt;
+
+    @Test
+    void test23(){
+        System.out.println(chatGpt.getAppid());
+    }
+
+
 
 
 
@@ -75,6 +106,28 @@ public class StartAppTest {
 //        System.out.println("日期：" + formattedDate);
     }
 
+
+    @Test
+    public void test16(){
+        // 获取当前时间
+        Calendar calendar = Calendar.getInstance();
+        // 在当前时间上加一个月
+        calendar.add(Calendar.MONTH,1);
+        Date MonThTime = calendar.getTime();
+        // 格式化日期输出
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String TwoTime = sdf.format(MonThTime);
+        Long TwoMonths = TimeStampUtils.TimeStamp(TwoTime);
+        //String UserTime = sdf.format(grow.getGrowNewTime());
+        String UserTime = "2024-3-16 12:22";
+        Long UserMonths = TimeStampUtils.TimeStamp(UserTime);
+        if(TwoMonths > UserMonths){
+            System.out.println("11111");
+        }else {
+            System.out.println("222222");
+        }
+    }
+
     @Test
     public void test11(){
         String date = "2024-02-07 22:59"; //2024-04-07 22:51
@@ -94,27 +147,146 @@ public class StartAppTest {
         }
     }
 
+
+    @Test
+    public void test15() throws ParseException {
+        String date = "Tue Feb 20 00:00:00 CST 2024";
+        //Fri Sep 20 00:00:00 CST 2024
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        System.out.println(sdf1.parse(date));
+
+        Calendar calendar = Calendar.getInstance();
+        //当前时间
+        Date currentDate = calendar.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        System.out.println(sdf.format(currentDate));
+    }
+
+    @Test
+    public void test13(){
+        Calendar calendar = Calendar.getInstance();
+        //当前时间
+        Date currentDate = calendar.getTime();
+        calendar.add(Calendar.MONTH, 2);
+        //两个月后的时间
+        Date newDate = calendar.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String dateNew1 = "2024-03-16 17:18";
+        String dateNew11 = "2024-01-16 17:18";
+        String dateNew2 = "2024-06-16 17:18";
+        String format1 = sdf.format(currentDate);
+        String format2 = sdf.format(newDate);
+        System.out.println("当前的日期：" + format1);
+        System.out.println("加两个月后的日期：" + format2);
+        Long stamp1 = TimeStampUtils.TimeStamp(dateNew1);//"2024-03-16 17:18"
+        Long stamp2 = TimeStampUtils.TimeStamp(dateNew2);//"2024-06-16 17:18"
+        Long stamp3 = TimeStampUtils.TimeStamp(format1);
+        Long stamp4 = TimeStampUtils.TimeStamp(format2);//"2024-04-16 17:18"
+        Long stamp5 = TimeStampUtils.TimeStamp(dateNew11);
+        if(stamp4 > stamp1){//"2024-04-16 17:18">"2024-03-16 17:18"
+            System.out.println("加2");//
+        }else {
+            System.out.println("减2");
+        }
+        if(stamp4 > stamp2){//"2024-04-16 17:18">"2024-06-16 17:18"
+            System.out.println("加3");
+        }else {
+            System.out.println("减3");//
+        }
+        if(stamp3 > stamp5){
+            System.out.println("111");//
+        }else {
+            System.out.println("22222");
+        }
+        if(stamp3 > stamp1){
+            System.out.println("加1");
+        }else {
+            System.out.println("减1");//
+        }
+
+
+    }
+
+
+
+    @Test
+    public void test12(){
+        String dateNew1 = "2024-03-16 17:18";
+        String substring = dateNew1.substring(5);
+        System.out.println(substring);
+        Long aLong = TimeStampUtils.TimeMinuteStamp(substring);
+        System.out.println(aLong);
+    }
+
     @Test
     public void test10(){
         // 获取当前时间
         Calendar calendar = Calendar.getInstance();
         Date currentDate = calendar.getTime();
+        String dateNew1 = "2024-03-16 17:18";
+        String substring = dateNew1.substring(5);
+        System.out.println(substring);
+        Long aLong = TimeStampUtils.TimeMinuteStamp(substring);
 
+        String dateNew2 = "2024-06-16 17:18";
+        String substring2 = dateNew2.substring(5);
+        System.out.println(substring2);
+        Long aLong2 = TimeStampUtils.TimeMinuteStamp(substring2);
         // 在当前时间上加两个月
         calendar.add(Calendar.MONTH, 2);
         Date newDate = calendar.getTime();
 
+        /**
+         * 当前日期：2024-02-16 17:18
+         * 加两个月后的日期：2024-04-16 17:18
+         * 相减:5184000
+         */
         // 格式化日期输出
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        System.out.println("当前日期：" + sdf.format(currentDate));
-        System.out.println("加两个月后的日期：" + sdf.format(newDate));
+        String format = sdf.format(currentDate);
+        String format1 = sdf.format(newDate);
+        String substring1 = format.substring(5);
+        String substring3 = format1.substring(5);
+        Long stamp1 = TimeStampUtils.TimeMinuteStamp(substring1);
+        System.out.println("当前时间日期时间戳:"+stamp1);
+        Long stamp2 = TimeStampUtils.TimeMinuteStamp(substring3);
+        System.out.println("当前时间日期:"+substring1);
+        System.out.println("当前时间日期两个月后的时间戳:"+stamp2);
+        System.out.println("当前时间日期两个月后的:"+substring3);
+        System.out.println("当前日期：" + format);
+        System.out.println("当前日期：" + TimeStampUtils.TimeStamp(format));
+        System.out.println("加两个月后的日期：" + format1);
+        System.out.println("加两个月后的日期：" + TimeStampUtils.TimeStamp(format1));
+        System.out.println("时间戳1："+ aLong);
+        System.out.println("时间戳2："+ aLong2);
+        long date = TimeStampUtils.TimeStamp(format1) - TimeStampUtils.TimeStamp(format);
+        long l2 = stamp2 - aLong;
+        long l3 = stamp2  - aLong2;
+        long l = date - aLong;
+        long l1 = date - aLong2;
+        System.out.println("相减:"+date);
+        System.out.println("结果:"+l);
+        System.out.println("结果2"+l1);
+        System.out.println(l2);
+        System.out.println(l3);
+        if(l2 > stamp1){
+            System.out.println("1111");
+        }else {
+            System.out.println("22222");
+        }
+        if(l3 > stamp1){
+            System.out.println("1111");
+        }else {
+            System.out.println("22222");
+        }
+
     }
 
     @Test
     public void tset(){
         //System.out.println("你好");
         //查找中文乱码
-       // System.out.println(System.getProperties());
+        // System.out.println(System.getProperties());
 
 //当前时间
         Date date2 = DateUtil.date(Calendar.getInstance());
@@ -183,6 +355,14 @@ public class StartAppTest {
         grows.forEach(System.out::println);
     }
 
+    @Test
+    public void test112(){
+        YearMonth yearMonth = YearMonth.now();
+        int daysInMonth = yearMonth.lengthOfMonth();
+        long times = daysInMonth * 60 * 60 * 24;
+        System.out.println(daysInMonth);
+        System.out.println(times);
+    }
 
 
     @Test
@@ -218,7 +398,7 @@ public class StartAppTest {
 
     @Test
     public void rediss(){
-        User user = userCacheService.getUser("admin");
+        User user = userCacheService.getUser("memory");
         System.out.println(user);
     }
 
@@ -236,6 +416,91 @@ public class StartAppTest {
         System.out.println(growTheme);
         grows.forEach(System.out::println);
     }
+
+    @Autowired
+    CommonAjaxController commonAjaxController;
+
+    @Autowired
+    QQEmailServiceImpl qqEmailService;
+    @Autowired
+    NetEaseServiceImpl netEaseService;
+
+
+    @Test
+    public void subTest(){
+        String time = "2024-02-04 20:49:00";
+        String[] split = time.split(" ");
+        System.out.println(split[0]);
+        String substring = split[0].substring(0, 4);//[)
+        System.out.println(substring);
+
+        // 获取当前时间的Calendar对象
+        Calendar calendar = Calendar.getInstance();
+
+        // 在当前年份上加上100年
+        calendar.add(Calendar.YEAR, 100);
+
+        // 获取加100年后的年份
+        int year = calendar.get(Calendar.YEAR);
+
+        // 输出结果
+        System.out.println("当前时间加100年后的年份是：" + year);
+
+    }
+
+    /**
+     * 获取当前时间类型yyyy-MM-dd HH:mm:ss
+     */
+    @Test
+    public void testTime(){
+        // 获取当前时间的Calendar对象
+        Calendar calendar = Calendar.getInstance();
+
+        // 创建SimpleDateFormat对象，指定日期时间格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        // 将Calendar对象转换为指定格式的字符串
+        String dateStr = sdf.format(calendar.getTime());
+        System.out.println(dateStr);
+    }
+
+
+    @Test
+    public void test123(){
+        String name = "李四";
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(User::getUserName,name);
+        User user = userMapper.selectOne(queryWrapper);
+        System.out.println(user);
+    }
+
+    @Test
+    public void QQEmailTest(){
+        //2099年时空法》
+        //String time = "2022-11-09";
+        // 获取当前时间的Calendar对象
+        Calendar calendar = Calendar.getInstance();
+
+        // 创建SimpleDateFormat对象，指定日期时间格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        // 将Calendar对象转换为指定格式的字符串
+        String time = sdf.format(calendar.getTime());
+        String title = "致青春，至未来";
+        String userEmail = "2162417277@qq.com";
+        netEaseService.CurrentMail(time,title,userEmail);
+    }
+
+    @Value("${spring.mail.username}")
+    private String username;
+
+    @Test
+    public void Test1Emial(){
+       // commonAjaxController.commonEmail();
+        System.out.println(username);
+    }
+
+
 
 
 
@@ -324,7 +589,7 @@ public class StartAppTest {
         user.setUserLogic(0);
         userMapper.insert(user);
     }
-    
+
     @Test
     public void redis(){
         redisTemplate.opsForValue().set("name","张伟洁");
@@ -434,7 +699,7 @@ public class StartAppTest {
             System.out.println("2222");
         }
     }
-    
+
     @Test
     public void queryGrow2(){
 //        Page page = pastService.queryPast(1, 1, 3);
@@ -456,9 +721,20 @@ public class StartAppTest {
         grow.setGrowTelephone("13856939334");
         grow.setWriteName("筱勇");
         grow.setReadName("猪心");
-        Grow insert = growService.GrowInsert(grow);
-        System.out.println("result:"+insert);
+       /* Grow insert = growService.GrowInsert(grow);
+        System.out.println("result:"+insert);*/
     }
+
+    @Autowired
+    PastDao pastDao;
+
+
+    @Test
+    public void testDatePast(){
+        Wrapper<Past> pasts = pastDao.queryPast(9);
+        System.out.println(pasts);
+    }
+
 
     @Test
     public void PastInsert(){
@@ -467,7 +743,7 @@ public class StartAppTest {
         past.setPastContent("亲爱的过去的自己，我相信你会变得越来越好。请记住，无论你走到哪里，我都会一直支持你、关心你。加油！");
         past.setPastVideo(null);
         //Past insert = pastService.PastInsert(past, 1);
-       //System.out.println("result:"+insert);
+        //System.out.println("result:"+insert);
     }
 
 
@@ -486,16 +762,16 @@ public class StartAppTest {
         past.setPastUserId(1);
         past.setPastTheme("某天");
         past.setPastContent("未来模式");
-        Past update = pastService.pastUpdate(past);
-        System.out.println("result:"+update);
+       // Past update = pastService.pastUpdate(past);
+        //System.out.println("result:"+update);
     }
 
     @Test
     public void growUpdate(){
         Grow grow = new Grow();
         grow.setGrowId(1);
-        Grow update = growService.growUpdate(grow);
-        System.out.println("result:"+update);
+        //Grow update = growService.growUpdate(grow);
+        //System.out.println("result:"+update);
     }
 
     @Test

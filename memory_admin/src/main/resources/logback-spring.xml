@@ -1,39 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration  scan="true" scanPeriod="60 seconds" debug="false">
-    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-    <!--<property name="LOG_HOME" value="/home" />-->
-    <!-- 控制台输出 -->
+<configuration>
+    <!--日志路径 -->
+    <property name="LOG_PATH" value="/data/logs/memory_admin"/>
+    <property name="LOG_FILE" value="memory_admin"/>
+    <!-- 格式化-->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="|%level|%d{yyyy-MM-dd HH:mm:ss.SSS}|%thread|%X{tid}|uid=%X{uid}|%msg|%X{callChain}%n"/>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
-    <!-- 按照每天生成日志文件 -->
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- 全部日志的配置-->
+    <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${LOG_FILE}.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!--日志文件输出的文件名-->
-            <!--<FileNamePattern>${LOG_HOME}/TestWeb.log.%d{yyyy-MM-dd}.log</FileNamePattern>-->
-            <FileNamePattern>
-                applog/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}.log
-            </FileNamePattern>
-            <!--日志文件保留天数-->
-            <MaxHistory>30</MaxHistory>
+            <!-- 按天生成日志文件 -->
+            <fileNamePattern>
+                ${LOG_PATH}/archived/${LOG_FILE}.%d{dd-MM-yyyy}.log
+            </fileNamePattern>
+            <!--保留天数-->
+            <maxHistory>30</maxHistory>
+            <!--单个文件的大小-->
+            <totalSizeCap>5GB</totalSizeCap>
         </rollingPolicy>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+
+    </appender>
+    <!-- error日志的配置-->
+    <appender name="fileError" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${LOG_PATH}/${LOG_FILE}.error.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
-        <!--日志文件最大的大小-->
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>10MB</MaxFileSize>
-        </triggeringPolicy>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${LOG_PATH}/archived/${LOG_FILE}.%d{dd-MM-yyyy}.error.log
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+        </rollingPolicy>
     </appender>
 
-
-    <!-- 日志输出级别 -->
-    <root level="INFO">
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILE" />
+    <root level="info">
+        <!--文件输出-->
+        <appender-ref ref="fileAppender"/>
+        <appender-ref ref="fileError"/>
+        <!--制台输出-->
+        <appender-ref ref="STDOUT"/>
     </root>
+
 </configuration>

@@ -1,13 +1,16 @@
 server:
-  port: 9999
+  port: ${memory.server.port}
 
 spring:
+  profiles:
+    active: dev
   application:
     name: memory
   datasource:
-    url: jdbc:mysql://${memory.mysql.ip}:${memory.mysql.port}/${memory.mysql.db}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://${memory.mysql.ip}:${memory.mysql.port}/${memory.mysql.db}?useUnicode=true&useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: ${memory.mysql.username}
     password: ${memory.mysql.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     # Redis服务器地址
     host: ${memory.redis.host}
@@ -15,6 +18,7 @@ spring:
     database: ${memory.redis.database}
     # Redis服务器端口号
     port: ${memory.redis.port}
+    password: ${memory.redis.password}
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
@@ -23,6 +27,25 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     #指定时间区域类型
     time-zone: GMT+8
+  mail:
+    host: smtp.163.com
+    port: 465
+    protocol: smtp
+    default-encoding: UTF-8
+    username: 13856939334@163.com
+    password: KXVOHWIOCHNPYASD
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
+        debug: true
+
 logging:
   level:
     root: info
@@ -79,19 +102,39 @@ redis:
 secure:
   ignored:
     urls: #安全路径白名单
-      -/admin/public/user/login
-      -admin/grow/queryGrow/**
-      -/js/**
-      -/css/**
-      -/img/**
-      -/**.html
-      -/swagger-ui.html
-      -/doc.html
+      - /admin/public/user/login
+      - /sendCommonEmail
+      - /admin/public/user/insert
+      - /admin/grow/queryGrow/**
+      - /js/**
+      - /css/**
+      - /img/**
+      - /**.html
+      - /swagger-ui.html/**
+      - /doc.html
+      - /swagger-resources
+      - /webjars/**
+      - /v2/api-docs
+      - /test/tes/test
 
 email:
   smtp:
     host: smtp.qq.com
     email: 2162417277@qq.com
-    name: 邮件提醒系统
+    name: 跨越时空管理局
     password: gcfoamlcdqirecgj
-    port: 25
+    port: 587
+
+
+sparkClient:
+  appid: 6a4cdab8
+  apiKey: ed22d4203115073c57c9aad373b5fff0
+  apiSecret: OWNjNTA3NDYzMTY4YTRkY2IzNDRlNzkz
+
+
+knife4j:
+  enable: true
+  basic:
+    enable: true
+    username: admin
+    password: 123456

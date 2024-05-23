@@ -3,6 +3,9 @@ package com.gnahz.utils;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * @Author 张伟洁
  * Date:2024-01-11-9:07
@@ -20,5 +23,10 @@ public class DateUtils {
         return dateTime;
     }
 
+    public static LocalDateTime DataLocalDateTime(String dateTimeStr){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(dateTimeStr, dateTimeFormatter);
+         return dateTime;
+    }
 
 }

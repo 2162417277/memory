@@ -1,6 +1,7 @@
 package com.gnahz.exception;
 
 import com.gnahz.api.CommonResult;
+import com.gnahz.api.IErrorCode;
 import com.gnahz.api.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
@@ -22,10 +23,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    public CommonResult handle(ApiException e){
+    public CommonResult handle(BusinessException e){
         if(e.getErrorCode() != null){
             //如果错误码不为空，则表示异常具有特定的错误码，因此使用该错误码作为失败的结果返回
-            return CommonResult.failed(e.getErrorCode());
+            return CommonResult.failed(e.getErrorMsg());
         }
         //如果错误码为空，则表示异常没有特定的错误码，而是使用异常的消息（getMessage()）作为失败的结果返回
         return CommonResult.failed(e.getMessage());
@@ -42,7 +43,7 @@ public class GlobalExceptionHandler {
         //使用log.error()方法记录异常信息
         log.error("运行时异常:",e);
         //返回一个通用的结果对象CommonResult，其中包含了失败的状态码ResultCode.UNKNOWN。这意味着当发生运行时异常时，该方法将返回一个未知错误的结果
-        return CommonResult.failed(ResultCode.UNKNOWN);
+        return CommonResult.failed(e.getMessage());
     }
 
     /**

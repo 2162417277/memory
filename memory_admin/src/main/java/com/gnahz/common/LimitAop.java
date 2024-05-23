@@ -69,7 +69,7 @@ public class LimitAop {
      */
     private void responseFail(String msg)  {
         HttpServletResponse response=((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
-        CommonResult<Long> commonResult = CommonResult.success(ResultCode.FREQUENT.getCode(), msg);
+        CommonResult<Integer> commonResult = CommonResult.success(ResultCode.FREQUENT.getCode(), msg);
         WebUtils.writeJson(response,commonResult);
     }
 }

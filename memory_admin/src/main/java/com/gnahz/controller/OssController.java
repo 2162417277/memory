@@ -24,7 +24,7 @@ public class OssController {
     @Autowired
     private OssServiceImpl ossService;
 
-    @ApiOperation(value = "oss上传签名生成")
+    @ApiOperation(value = "oss上传签名生成",hidden = true)
     @RequestMapping(value = "/policy",method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<OssPolicyResult> policy(){
