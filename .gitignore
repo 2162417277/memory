@@ -7,3 +7,14 @@
 out
 gen
 .properties
+/memory_security/target/memory_security-0.0.1-SNAPSHOT.jar
+/memory_security/target/maven-archiver/pom.properties
+/memory_admin/target/classes/application-prod.properties
+/memory_admin/target/classes/application-dev.properties
+/memory_admin/target/classes/application.properties
+/applog/2024-01-28/*.log
+/memory_admin/target/maven-status/maven-compiler-plugin/compile/default-compile/*.lst
+/memory_admin/target/memory_admin-0.0.1-SNAPSHOT.jar.original
+/memory_ai/target/memory_ai-0.0.1-SNAPSHOT.jar
+/memory_admin/target/memory_admin-0.0.3-SNAPSHOT.jar
+/memory_common/target/memory_common-0.0.1-SNAPSHOT.jar
