@@ -4,6 +4,5 @@
 # IntelliJ project files
 .idea
 *.iml
-*.properties
 out
 gen

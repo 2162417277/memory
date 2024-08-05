@@ -4,69 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4e2be70-f346-42fe-ae33-859488d7219c" name="变更" comment="项目上线完成">
-      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/ai/controller/ChatGptController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/ai/dao/ChatGpt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/ai/server/ChatGptServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/ai/server/impl/ChatGptServerImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/ai/vo/GptReq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/SparkClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/constant/SparkApiVersion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/constant/SparkErrorCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/constant/SparkMessageRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/exception/SparkException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/listener/SparkBaseListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/listener/SparkConsoleListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/listener/SparkSyncChatListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/SparkChatParameter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/SparkMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/SparkRequestBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/SparkSyncChatResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/request/SparkRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/request/SparkRequestHeader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/request/SparkRequestMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/request/SparkRequestParameter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/request/SparkRequestPayload.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/request/function/SparkFunctionBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/request/function/SparkRequestFunctionMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/request/function/SparkRequestFunctionParameters.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/request/function/SparkRequestFunctionProperty.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/request/function/SparkRequestFunctions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/response/SparkResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/response/SparkResponseChoices.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/response/SparkResponseFunctionCall.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/response/SparkResponseHeader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/response/SparkResponsePayload.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/response/SparkResponseUsage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memory_ai/src/main/java/com/gnahz/model/response/SparkTextUsage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="f4e2be70-f346-42fe-ae33-859488d7219c" name="变更" comment="项目上线ai">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/memory_admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/memory_admin.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/Swagger2Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/config/Swagger2Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/ChatGptController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/GrowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/GrowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/Oss2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/Oss2Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/OssController.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/OssController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/PastController.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/PastController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/java/com/gnahz/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/test/java/com/gnahz/StartAppTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/test/java/com/gnahz/StartAppTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/config/Swagger2Config.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/config/Swagger2Config.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/GrowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/GrowController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/Oss2Controller.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/OssController.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/OssController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/PastController.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/PastController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/classes/com/gnahz/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/target/test-classes/com/gnahz/StartAppTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/target/test-classes/com/gnahz/StartAppTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_ai/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/memory_ai/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz/api/CommonResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz/api/CommonResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz/api/ResultCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/memory_common/src/main/java/com/gnahz/api/ResultCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_common/target/classes/com/gnahz/api/CommonResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_common/target/classes/com/gnahz/api/CommonResult.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_common/target/classes/com/gnahz/api/ResultCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/memory_common/target/classes/com/gnahz/api/ResultCode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/resources/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/resources/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -409,7 +349,7 @@
       <workItem from="1716983307247" duration="4587000" />
       <workItem from="1717041894373" duration="621000" />
       <workItem from="1721654392065" duration="1117000" />
-      <workItem from="1722865745721" duration="329000" />
+      <workItem from="1722865745721" duration="1478000" />
     </task>
     <task id="LOCAL-00001" summary="配置父类maven">
       <created>1704346248831</created>
@@ -516,7 +456,14 @@
       <option name="project" value="LOCAL" />
       <updated>1716456763047</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="项目上线ai">
+      <created>1722866253507</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1722866253507</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -547,7 +494,9 @@
     <MESSAGE value="JWT拦截完成" />
     <MESSAGE value="项目完成上线测试" />
     <MESSAGE value="项目上线完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="项目上线完成" />
+    <MESSAGE value="项目上" />
+    <MESSAGE value="项目上线ai" />
+    <option name="LAST_COMMIT_MESSAGE" value="项目上线ai" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
