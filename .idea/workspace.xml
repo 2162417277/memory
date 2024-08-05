@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f4e2be70-f346-42fe-ae33-859488d7219c" name="变更" comment="项目上线ai">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory_admin/src/main/resources/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/memory_admin/src/main/resources/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +76,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="ChangesTree.GroupingKeys" value="directory" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RequestMappingsPanelOrder0" value="0" />
@@ -99,6 +99,9 @@
     <property name="project.structure.side.proportion" value="0.27921405" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="Push.Settings">
+    <option name="SHOW_DETAILS_PANEL" value="false" />
   </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
@@ -349,7 +352,7 @@
       <workItem from="1716983307247" duration="4587000" />
       <workItem from="1717041894373" duration="621000" />
       <workItem from="1721654392065" duration="1117000" />
-      <workItem from="1722865745721" duration="1478000" />
+      <workItem from="1722865745721" duration="1623000" />
     </task>
     <task id="LOCAL-00001" summary="配置父类maven">
       <created>1704346248831</created>
@@ -463,7 +466,14 @@
       <option name="project" value="LOCAL" />
       <updated>1722866253507</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="项目上线ai">
+      <created>1722867279142</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1722867279142</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
