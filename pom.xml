@@ -8,6 +8,7 @@
         <module>memory_security</module>
         <module>memory_common</module>
         <module>memory_ai</module>
+        <module>test</module>
     </modules>
 
     <parent>

@@ -42,9 +42,6 @@ public interface GrowMapper extends BaseMapper<Grow> {
                     @Param("growTelephone") String growTelephone,//手机号,
                     @Param("writeName") String writeName,//写者姓名,
                     @Param("readName") String readName);//发送者姓名
-
-
-
     String OldTime(@Param("cron")String cron);
 
     /**

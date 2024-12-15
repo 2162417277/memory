@@ -81,7 +81,7 @@ public class GrowController {
      * @return
      */
     @ApiOperation("修改操作")
-    @RequestMapping(value = "/growUpdate",method = RequestMethod.POST)
+    @RequestMapping(value = "/growUpdate",method  = RequestMethod.POST)
     public CommonResult<Void> growUpdate(@Validated @RequestBody Grow grow){
         //前端传入一个表单只要不为空或null那么字段就进行修改
        growService.growUpdate(grow);

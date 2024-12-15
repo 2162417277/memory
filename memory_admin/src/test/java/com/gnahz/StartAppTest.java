@@ -525,7 +525,7 @@ public class StartAppTest {
     public void jwt(){
         //
         //Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX25hbWUiOiLmnY7lm5siLCJjcmVhdGVkIjoxNzA1OTI4MzExMDA5LCJleHAiOjE3MDYwMTQ3MTF9.y_PsymS9jx0qYCjYSVJE6T-XapyCu8c4DuSzZmALk7Im8N-lFa8ZABl-ELUTzR7mMbaa19UYXkCIaO-NYZcOfA
-        String nameStr = jwtTokenUtil.generateUserNameStr("朱先生");
+        String nameStr = jwtTokenUtil.generateUserNameStr("李绅困");
         System.out.println(nameStr);
 //        String username = "李四";
 //        String username = "admin";
@@ -551,6 +551,14 @@ public class StartAppTest {
             System.out.println("2");
         }
     }
+
+    @Test
+    public void te(){
+        String password = "qwert";
+        String encodePassword = BCrypt.hashpw(password);
+        System.out.println(encodePassword);
+    }
+
 
     @Test
     public void md5AndUser(){
@@ -703,7 +711,7 @@ public class StartAppTest {
     @Test
     public void queryGrow2(){
 //        Page page = pastService.queryPast(1, 1, 3);
-        Page page = growService.queryGrow(1, 1, 3);
+        Page page = growService.queryGrow(9, 1, 3);
         CommonResult<CommonPage> success = CommonResult.success(CommonPage.restPage(page));
         System.out.println(success);
     }
