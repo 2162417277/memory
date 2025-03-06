@@ -32,8 +32,8 @@ spring:
     port: 465
     protocol: smtp
     default-encoding: UTF-8
-    username: 13856939334@163.com
-    password: KXVOHWIOCHNPYASD
+    username: 
+    password:
     test-connection: true
     properties:
       mail:
@@ -120,16 +120,16 @@ secure:
 email:
   smtp:
     host: smtp.qq.com
-    email: 2162417277@qq.com
+    email:
     name: 跨越时空管理局
-    password: gcfoamlcdqirecgj
+    password: 
     port: 587
 
 
 sparkClient:
-  appid: 6a4cdab8
-  apiKey: ed22d4203115073c57c9aad373b5fff0
-  apiSecret: OWNjNTA3NDYzMTY4YTRkY2IzNDRlNzkz
+  appid: 
+  apiKey: 
+  apiSecret: 
 
 
 knife4j:
